@@ -514,4 +514,83 @@ footer {
         width: 100%;
         justify-content: flex-start;
     }
+    
+}
+/* ... código anterior ... */
+
+/* ===== WIDGET TERMINAL "PREMIUM" ===== */
+.terminal-loader {
+    margin-top: 2.5rem;
+    border: 1px solid #30363d;
+    background-color: #0d1117;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra profunda */
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para que no se estire demasiado */
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto Hover: La terminal se eleva */
+.terminal-loader:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(88, 166, 255, 0.15); /* Resplandor azul sutil */
+    border-color: #58a6ff;
+}
+
+/* Cabecera de la ventana (tipo VS Code) */
+.terminal-header {
+    background-color: #161b22;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #30363d;
+}
+
+.terminal-title {
+    color: #8b949e;
+    font-size: 0.8rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* Botones de ventana (Rojo, Amarillo, Verde) */
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.control.close { background-color: #ff5f56; }
+.control.minimize { background-color: #ffbd2e; }
+.control.maximize { background-color: #27c93f; }
+
+/* Cuerpo del código */
+.terminal-text {
+    padding: 20px;
+    font-family: 'Consolas', 'Fira Code', monospace;
+    font-size: 1.1rem;
+    color: #c9d1d9;
+    line-height: 1.6;
+}
+
+/* Colores de Sintaxis (Highlighting estilo Python) */
+.cmd-keyword {
+    color: #ff7b72; /* Naranja/Rojo para 'if' */
+    font-weight: bold;
+}
+
+.cmd-func {
+    color: #d2a8ff; /* Morado para la condición */
+}
+
+.cmd-action {
+    color: #79c0ff; /* Azul para la acción */
+    text-shadow: 0 0 10px rgba(121, 192, 255, 0.4); /* Pequeño brillo neon */
 }

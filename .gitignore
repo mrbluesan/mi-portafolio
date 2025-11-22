@@ -17,7 +17,7 @@ ehthumbs.db
 .log
 npm-debug.log
 
---- Dependencias (Por si usas node en el futuro) ---
+--- Dependencias (Por si uso node en el futuro) ---
 
 node_modules/
 dist/
