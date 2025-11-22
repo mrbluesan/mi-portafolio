@@ -18,7 +18,7 @@ faders.forEach(fader => {
 });
 
 // ===== Typewriter Effect =====
-const text = "HENRY ALEXANDER LEYTON GONZÁLEZ";
+const text = "HENRY LEYTON GONZÁLEZ";
 const speed = 90; // Un poco más rápido para que sea más fluido
 let i = 0;
 const typewriterElement = document.getElementById("typewriter");
