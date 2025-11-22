@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - bluesan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h2 id="typewriter"></h2>
+            <div>
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#tecnologias">Skills</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- SECCIÓN 1: SOBRE MÍ -->
+        <section id="sobre-mi" class="fade-in">
+            <h1>Sobre mi</h1>
+            <p>
+                Programador autodidacta con especialización en Python, orientado al desarrollo de scripts, automatización de tareas y resolución eficiente de problemas técnicos. Experiencia creando soluciones automatizadas en entornos laborales (incluyendo desarrollo previo en Visual Basic), optimizando procesos y mejorando flujos operativos. Manejo Git, MySQL, y entornos Linux, con enfoque en buenas prácticas, lógica de programación y productividad. Interés activo en ciberseguridad y pentesting (Hack The Box), lo que refuerza mi análisis crítico y atención al detalle. Busco integrarme a proyectos donde pueda aportar con desarrollo sólido y seguir avanzando profesionalmente.
+            </p>
+        </section>
+
+        <!-- SECCIÓN 2: SKILLS  -->
+        <section id="tecnologias" class="fade-in">
+            <h2>Stack Tecnológico</h2>
+            <div class="tech-grid">
+                <div class="tech-card tech-python">
+                    <div class="icon-box"><i class="fab fa-python"></i></div><span>Python</span>
+                </div>
+                <div class="tech-card tech-csharp">
+                    <div class="icon-box"><i class="fas fa-code"></i></div><span>C# .NET</span>
+                </div>
+                <div class="tech-card tech-sql">
+                    <div class="icon-box"><i class="fas fa-database"></i></div><span>SQL / MySQL</span>
+                </div>
+                <div class="tech-card tech-linux">
+                    <div class="icon-box"><i class="fab fa-linux"></i></div><span>Linux</span>
+                </div>
+                <div class="tech-card tech-git">
+                    <div class="icon-box"><i class="fab fa-git-alt"></i></div><span>Git</span>
+                </div>
+                <div class="tech-card tech-html">
+                    <div class="icon-box"><i class="fab fa-html5"></i></div><span>HTML5</span>
+                </div>
+                <div class="tech-card tech-css">
+                    <div class="icon-box"><i class="fab fa-css3-alt"></i></div><span>CSS3</span>
+                </div>
+                <div class="tech-card tech-security">
+                    <div class="icon-box"><i class="fas fa-user-shield"></i></div><span>Pentesting</span>
+                </div>
+            </div> <!-- Fin del Grid -->
+        </section> <!-- Fin de la Sección Skills -->
+
+        <!-- SECCIÓN 3: PROYECTOS (Ahora fuera del grid anterior) -->
+        <section id="proyectos" class="fade-in">
+            <h2>Proyectos Destacados</h2>
+
+            <!-- PROYECTO 1 -->
+            <div class="card">
+                <div class="slider-wrapper">
+                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-container">
+                        
+                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
+                            <img src="assets\img\img0-project1.png" alt="Login">
+                        </a>
+                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
+                            <img src="assets\img\img1-project1.png" alt="Dashboard">
+                        </a>
+                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
+                            <img src="assets\img\img2-project1.png" alt="Usuarios">
+                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
+                            <img src="assets\img\img3-project1.png" alt="Usuarios">
+                        </a>
+                    </div>
+                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="card-content">
+                    <h3>Sistema CRUD para ONG</h3>
+                    <p>Aplicación web con Python (Django) y MySQL. Permite registrar usuarios, listar y ver datos
+                        generales.</p>
+                    <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="btn-repo">
+                        Ver en GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PROYECTO 2 -->
+            <div class="card">
+                <div class="slider-wrapper">
+                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-container">
+                        <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="slider-item">
+                            <img src="https://placehold.co/600x350/21262d/FCC624?text=Linux:+Terminal" alt="Terminal">
+                        </a>
+                        <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="slider-item">
+                            <img src="https://placehold.co/600x350/161b22/FCC624?text=Linux:+Codigo" alt="Código">
+                        </a>
+                    </div>
+                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="card-content">
+                    <h3>Automatización en Linux</h3>
+                    <p>Script en Python diseñado para optimizar la organización de archivos y directorios en entornos
+                        Linux.</p>
+                    <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="btn-repo">
+                        Ver en GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PROYECTO 3 -->
+            <div class="card">
+                <div class="slider-wrapper">
+                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-container">
+                        <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="slider-item">
+                            <img src="https://placehold.co/600x350/21262d/00ff41?text=Pentest:+Escaneo" alt="Escaneo">
+                        </a>
+                        <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="slider-item">
+                            <img src="https://placehold.co/600x350/000000/00ff41?text=Pentest:+Reporte" alt="Reporte">
+                        </a>
+                    </div>
+                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="card-content">
+                    <h3>Laboratorio de Pentesting</h3>
+                    <p>Informe detallado de un pentest simulado a un servicio FTP vulnerable (vsftpd 2.3.4) maquina: SimpleCTF.</p>
+                    <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="btn-repo">
+                        Ver en GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN 4: CONTACTO -->
+        <section id="contacto" class="fade-in">
+            <h2>Contacto</h2>
+            <p>Puedes contactarme a través de mi correo electrónico: <strong>henryalexanderleyton@gmail.com</strong></p>
+            <p>O encontrarme en mis perfiles profesionales:</p>
+            <ul>
+                <li><a href="https://github.com/mrbluesan" class="link-github" target="_blank"><i
+                            class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="https://tryhackme.com/p/bsan" class="link-thm" target="_blank"><i
+                            class="fas fa-shield-alt"></i> TryHackMe</a></li>
+                <li><a href="https://www.linkedin.com/in/henry-leyton-gonz%C3%A1lez-97270717b/" class="link-linkedin" target="_blank"><i
+                            class="fab fa-linkedin"></i> LinkedIn</a></li>
+            </ul>
+            <p style="text-align: center;">
+                <a href="assets\docs\CV_Henry_Leyton.pdf" download class="btn-cv">
+                    <i class="fas fa-file-download"></i> Descargar mi CV
+                </a>
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Henry Leyton González - Portafolio Personal</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

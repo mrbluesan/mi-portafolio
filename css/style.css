@@ -1,0 +1,507 @@
+/* =========================================
+1. ESTILOS GLOBALES (FONDO, FUENTES)
+   ========================================= */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* El fondo oscuro animado */
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #c9d1d9;
+    line-height: 1.6;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    padding: 9rem 2rem 3rem 2rem;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1,
+h2 {
+    color: #ffffff;
+    border-bottom: 2px solid #30363d;
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+2. HEADER & NAVEGACIÓN
+   ========================================= */
+header {
+    background: rgba(22, 27, 34, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    border-bottom: 1px solid #30363d;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+header nav h2 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+header nav a {
+    color: #c9d1d9;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+    font-weight: 500;
+}
+
+header nav a:hover {
+    color: #58a6ff;
+    text-shadow: 0 0 8px rgba(88, 166, 255, 0.4);
+}
+
+/* =========================================
+3. TARJETAS (CARDS) GENERALES
+   ========================================= */
+.card {
+    background: #161b22;
+    padding: 0;
+    /* Sin padding para que el slider toque los bordes */
+    margin: 2rem 0;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #58a6ff;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card h3 {
+    color: #58a6ff;
+    margin-top: 0;
+}
+
+/* Botón "Ver en GitHub" */
+.btn-repo {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem;
+    color: #c9d1d9;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, padding 0.3s;
+}
+
+.btn-repo:hover {
+    color: #58a6ff;
+    padding-left: 5px;
+}
+
+.btn-repo i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.btn-repo:hover i {
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+4. SLIDER (CARRUSEL DE IMÁGENES)
+   ========================================= */
+.slider-wrapper {
+    position: relative;
+    /* Para posicionar los botones flecha */
+}
+
+.slider-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Obliga a centrar la imagen */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Oculta barra en Firefox */
+}
+
+.slider-container::-webkit-scrollbar {
+    display: none;
+    /* Oculta barra en Chrome */
+}
+
+.slider-item {
+    flex: 0 0 100%;
+    /* Cada item ocupa el 100% del ancho */
+    scroll-snap-align: center;
+    border-bottom: 1px solid #30363d;
+
+    /* Fondo oscuro para el efecto "marco" */
+    background-color: #010409;
+    height: 280px;
+    /* Altura fija */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* EFECTO FLOTANTE: Separación de los bordes */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.slider-item img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* La imagen entera sin recortar */
+    display: block;
+
+    /* Sombra y bordes para la imagen flotante */
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+/* Botones Flecha (Estilo Cristal) */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(22, 27, 34, 0.6);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c9d1d9;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.slider-btn:hover {
+    background: #58a6ff;
+    color: #0d1117;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.4);
+}
+
+.prev-btn {
+    left: 15px;
+}
+
+.next-btn {
+    right: 15px;
+}
+
+
+/* =========================================
+5. SKILLS (TECNOLOGÍAS)
+   ========================================= */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.tech-card {
+    position: relative;
+    background: rgba(22, 27, 34, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem 1rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    cursor: default;
+}
+
+.icon-box {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #8b949e;
+    transition: all 0.4s ease;
+}
+
+.tech-card span {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #c9d1d9;
+}
+
+/* Colores específicos Hover */
+.tech-python:hover {
+    border-color: #3776AB;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(55, 118, 171, 0.5);
+}
+
+.tech-python:hover .icon-box {
+    color: #3776AB;
+}
+
+.tech-csharp:hover {
+    border-color: #9b4993;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(155, 73, 147, 0.5);
+}
+
+.tech-csharp:hover .icon-box {
+    color: #9b4993;
+}
+
+.tech-sql:hover {
+    border-color: #00bcff;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(0, 188, 255, 0.5);
+}
+
+.tech-sql:hover .icon-box {
+    color: #00bcff;
+}
+
+.tech-linux:hover {
+    border-color: #FCC624;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(252, 198, 36, 0.5);
+}
+
+.tech-linux:hover .icon-box {
+    color: #FCC624;
+}
+
+.tech-git:hover {
+    border-color: #F05032;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(240, 80, 50, 0.5);
+}
+
+.tech-git:hover .icon-box {
+    color: #F05032;
+}
+
+.tech-html:hover {
+    border-color: #E34F26;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(227, 79, 38, 0.5);
+}
+
+.tech-html:hover .icon-box {
+    color: #E34F26;
+}
+
+.tech-css:hover {
+    border-color: #1572B6;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(21, 114, 182, 0.5);
+}
+
+.tech-css:hover .icon-box {
+    color: #1572B6;
+}
+
+.tech-security:hover {
+    border-color: #00ff41;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px -10px rgba(0, 255, 65, 0.5);
+}
+
+.tech-security:hover .icon-box {
+    color: #00ff41;
+}
+
+
+/* =========================================
+6. FOOTER & CONTACTO
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    background: #161b22;
+    color: #8b949e;
+    border-top: 1px solid #30363d;
+}
+
+#contacto ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    justify-content: center;
+    /* Centrar iconos en escritorio también */
+}
+
+#contacto ul li a {
+    color: #c9d1d9;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#contacto ul li a:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+#contacto .link-github:hover {
+    color: #ffffff;
+}
+
+#contacto .link-thm:hover {
+    color: #a1ff4d;
+}
+
+#contacto .link-linkedin:hover {
+    color: #0a66c2;
+}
+
+#contacto ul li a i {
+    font-size: 2.5rem;
+    transition: transform 0.3s;
+}
+
+.btn-cv {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    background: #58a6ff;
+    color: #0d1117;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn-cv:hover {
+    background: #79c0ff;
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+7. UTILIDADES Y ANIMACIONES
+   ========================================= */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto Máquina de Escribir */
+#typewriter {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    color: #58a6ff;
+    font-weight: bold;
+}
+
+#typewriter::after {
+    content: '|';
+    position: absolute;
+    right: -10px;
+    color: #c9d1d9;
+    opacity: 0;
+    animation: none;
+}
+
+#typewriter.typing-done::after {
+    opacity: 1;
+    animation: blinkCursor 0.8s step-end infinite;
+}
+
+@keyframes blinkCursor {
+
+    from,
+    to {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+8. RESPONSIVO (MÓVILES)
+   ========================================= */
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .container {
+        padding-top: 13rem;
+    }
+
+    #contacto ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #contacto ul li a {
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-start;
+    }
+}

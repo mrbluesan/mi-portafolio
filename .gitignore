@@ -1,0 +1,23 @@
+--- Archivos del Sistema Operativo (Basura) ---
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+--- Archivos de configuración del Editor (VS Code, etc) ---
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+--- Archivos de Log (Errores) ---
+
+.log
+npm-debug.log
+
+--- Dependencias (Por si usas node en el futuro) ---
+
+node_modules/
+dist/
