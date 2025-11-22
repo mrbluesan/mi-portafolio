@@ -1,5 +1,5 @@
 /* =========================================
-1. ESTILOS GLOBALES (FONDO, FUENTES)
+    1. ESTILOS GLOBALES (FONDO, FUENTES)
    ========================================= */
 body {
     margin: 0;
@@ -41,7 +41,7 @@ h2 {
 }
 
 /* =========================================
-2. HEADER & NAVEGACIÓN
+    2. HEADER & NAVEGACIÓN
    ========================================= */
 header {
     background: rgba(22, 27, 34, 0.95);
@@ -83,7 +83,7 @@ header nav a:hover {
 }
 
 /* =========================================
-3. TARJETAS (CARDS) GENERALES
+    3. TARJETAS (CARDS) GENERALES
    ========================================= */
 .card {
     background: #161b22;
@@ -140,7 +140,7 @@ header nav a:hover {
 
 
 /* =========================================
-4. SLIDER (CARRUSEL DE IMÁGENES)
+    4. SLIDER (CARRUSEL DE IMÁGENES)
    ========================================= */
 .slider-wrapper {
     position: relative;
@@ -235,7 +235,7 @@ header nav a:hover {
 
 
 /* =========================================
-5. SKILLS (TECNOLOGÍAS)
+    5. SKILLS (TECNOLOGÍAS)
    ========================================= */
 .tech-grid {
     display: grid;
@@ -354,7 +354,7 @@ header nav a:hover {
 
 
 /* =========================================
-6. FOOTER & CONTACTO
+    6. FOOTER & CONTACTO
    ========================================= */
 footer {
     text-align: center;
@@ -430,7 +430,7 @@ footer {
 
 
 /* =========================================
-7. UTILIDADES Y ANIMACIONES
+    7. UTILIDADES Y ANIMACIONES
    ========================================= */
 .fade-in {
     opacity: 0;
@@ -481,13 +481,23 @@ footer {
 
 
 /* =========================================
-8. RESPONSIVO (MÓVILES)
+    8. RESPONSIVO (MÓVILES)
    ========================================= */
 @media (max-width: 768px) {
     header nav {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+    }
+
+    /* Ajuste para el nombre en móviles */
+    #typewriter {
+        white-space: normal;
+        /* Permite que el texto salte de línea */
+        text-align: center;
+        /* Centra el texto */
+        font-size: 1.2rem;
+        /* Reduce un poco el tamaño para que quepa mejor */
     }
 
     .container {

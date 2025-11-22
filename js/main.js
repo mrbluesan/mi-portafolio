@@ -17,9 +17,9 @@ faders.forEach(fader => {
     appearOnScroll.observe(fader);
 });
 
-// ===== Typewriter Effect =====
-const text = "HENRY LEYTON GONZÁLEZ";
-const speed = 90; // Un poco más rápido para que sea más fluido
+// ===== Typewriter Effect (MEJORADO) =====
+const text = "HENRY ALEXANDER LEYTON GONZÁLEZ";
+const speed = 50; // Velocidad aumentada (menor número = más rápido)
 let i = 0;
 const typewriterElement = document.getElementById("typewriter");
 
@@ -31,12 +31,12 @@ function typeWriter() {
         setTimeout(typeWriter, speed);
     } else {
         
-        //activa el parpadeo del cursor en el CSS
+        // clase que activa el parpadeo del cursor en el CSS
         typewriterElement.classList.add("typing-done");
     }
 }
 
-// Esperar un segundo antes de empezar para que la página cargue bien
+// un segundo antes de empezar para que la página cargue bien
 window.onload = function () {
     setTimeout(typeWriter, 1000);
 };
