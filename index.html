@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - bluesan</title>
+    <title>Portafolio - Henry Leyton</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        xintegrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -25,141 +26,274 @@
 
     <main class="container">
 
-        <!-- SECCIÓN 1: SOBRE MÍ -->
+        <!-- SECCIÓN 1: SOBRE MÍ + TERMINAL 3D -->
         <section id="sobre-mi" class="fade-in">
             <h1>Sobre mi</h1>
             <p>
-                Soy estudiante de Ingeniería de Ejecución en Informática Mención Desarrollo de Sistemas, apasionado por la automatización y la eficiencia. Mi fuerte es Python, lenguaje con el que he desarrollado herramientas de gestión, scripts operativos y soluciones de escritorio integradas con bases de datos SQL.
-                Mi curiosidad técnica me ha llevado a explorar más allá del código: gestiono entornos Linux, utilizo herramientas de ciberseguridad para fortalecer mis desarrollos y actualmente estoy incursionando en el mundo móvil con Kotlin. Busco un entorno donde pueda aportar mi capacidad analítica para resolver problemas reales, mientras continúo evolucionando hacia arquitecturas de software más robustas y escalables.
+                Soy estudiante de Ingeniería de Ejecución en Informática Mención Desarrollo de Sistemas, apasionado por la automatización y la eficiencia. Mi fuerte es Python, lenguaje con el que he desarrollado herramientas de gestión, scripts operativos y soluciones de escritorio integradas con bases de datos SQL. Mi curiosidad técnica me ha llevado a explorar más allá del código: gestiono entornos Linux, utilizo herramientas de ciberseguridad para fortalecer mis desarrollos y actualmente estoy incursionando en el mundo móvil con Kotlin. Busco un entorno donde pueda aportar mi capacidad analítica para resolver problemas reales, mientras continúo evolucionando hacia arquitecturas de software más robustas y escalables.
             </p>
 
-            <!-- ===== NUEVO WIDGET: TERMINAL DE CÓDIGO ===== -->
-        <div class="terminal-loader">
-            <div class="terminal-header">
-                <div class="terminal-title">main.py</div>
-                <div class="terminal-controls">
-                    <div class="control close"></div>
-                    <div class="control minimize"></div>
-                    <div class="control maximize"></div>
+            <!-- WIDGET FLIP TERMINAL -->
+            <div class="terminal-scene">
+                <div class="terminal-card" id="terminalCard">
+
+                    <!-- CARA FRONTAL (Python) -->
+                    <div class="terminal-face front">
+                        <div class="terminal-header">
+                            <div class="terminal-title">main.py</div>
+                            <div class="terminal-controls">
+                                <div class="control close"></div>
+                                <div class="control minimize"></div>
+                                <div class="control maximize"></div>
+                            </div>
+                        </div>
+                        <div class="terminal-text">
+                            <span class="cmd-keyword">if</span> <span class="cmd-func">puedes_imaginarlo</span>():<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmd-action">puedes_programarlo</span>()
+                            <br><br>
+                            <span class="comment"># Haz clic para abrir consola >_</span>
+                        </div>
+                    </div>
+
+                    <!-- CARA TRASERA (Bash) -->
+                    <div class="terminal-face back">
+                        <div class="terminal-header bash-header">
+                            <div class="terminal-title">root@kali:~</div>
+                            <div class="terminal-controls">
+                                <div class="control close" id="closeTerminal"></div>
+                            </div>
+                        </div>
+                        <div class="bash-body" id="bashBody">
+                            <div class="output">
+                                Henry's Shell v1.0<br>
+                                Type <span class="cmd-highlight">'help'</span> for commands.
+                            </div>
+                            <div class="input-line">
+                                <span class="prompt">root@kali:~$</span>
+                                <input type="text" id="bashInput" autocomplete="off" autofocus>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="terminal-text">
-                <span class="cmd-keyword">if</span> <span class="cmd-func">puedes_imaginarlo</span>():<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmd-action">puedes_programarlo</span>()
-            </div>
-        </div>
         </section>
 
-        <!-- SECCIÓN 2: SKILLS  -->
+        <!-- SECCIÓN 2: SKILLS INTERACTIVOS -->
         <section id="tecnologias" class="fade-in">
             <h2>Stack Tecnológico</h2>
+            <p style="text-align: center; color: #8b949e; font-size: 0.9rem; margin-bottom: 2rem;">
+                <i class="fas fa-hand-pointer"></i> Haz clic en las tarjetas para ver librerías
+            </p>
             <div class="tech-grid">
-                <div class="tech-card tech-python">
-                    <div class="icon-box"><i class="fab fa-python"></i></div><span>Python</span>
-                </div>
-                <div class="tech-card tech-csharp">
-                    <div class="icon-box"><i class="fas fa-code"></i></div><span>C# .NET</span>
-                </div>
-                <div class="tech-card tech-sql">
-                    <div class="icon-box"><i class="fas fa-database"></i></div><span>SQL / MySQL</span>
-                </div>
-                <div class="tech-card tech-linux">
-                    <div class="icon-box"><i class="fab fa-linux"></i></div><span>Linux</span>
-                </div>
-                <div class="tech-card tech-git">
-                    <div class="icon-box"><i class="fab fa-git-alt"></i></div><span>Git</span>
-                </div>
-                <div class="tech-card tech-html">
-                    <div class="icon-box"><i class="fab fa-html5"></i></div><span>HTML5</span>
-                </div>
-                <div class="tech-card tech-css">
-                    <div class="icon-box"><i class="fab fa-css3-alt"></i></div><span>CSS3</span>
-                </div>
-                <div class="tech-card tech-security">
-                    <div class="icon-box"><i class="fas fa-user-shield"></i></div><span>Pentesting</span>
-                </div>
-            </div> <!-- Fin del Grid -->
-        </section> <!-- Fin de la Sección Skills -->
 
-        <!-- SECCIÓN 3: PROYECTOS (Ahora fuera del grid anterior) -->
+                <!-- Python -->
+                <div class="tech-card tech-python">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fab fa-python"></i></div>
+                        <span class="tech-name">Python</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>Django</li>
+                            <li>ciberseguridad</li>
+                            <li>Scripting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- C# -->
+                <div class="tech-card tech-csharp">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fas fa-code"></i></div>
+                        <span class="tech-name">C# .NET</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>.NET Core</li>
+                            <li>WinForms</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SQL -->
+                <div class="tech-card tech-sql">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fas fa-database"></i></div>
+                        <span class="tech-name">SQL</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>MySQL</li>
+                            <li>SQLite</li>
+                            <li>Relacional</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Linux -->
+                <div class="tech-card tech-linux">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fab fa-linux"></i></div>
+                        <span class="tech-name">Linux</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>Bash</li>
+                            <li>Permisos</li>
+                            <li>Parrot Os</li>
+                            <li>Kali</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Git -->
+                <div class="tech-card tech-git">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fab fa-git-alt"></i></div>
+                        <span class="tech-name">Git</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>GitHub</li>
+                            <li>Branches</li>
+                            <li>Git bash</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- HTML5 -->
+                <div class="tech-card tech-html">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fab fa-html5"></i></div>
+                        <span class="tech-name">HTML5</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>Semántica</li>
+                            <li>Accesibilidad</li>
+                            <li>Canvas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CSS3 -->
+                <div class="tech-card tech-css">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fab fa-css3-alt"></i></div>
+                        <span class="tech-name">CSS3</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>Flexbox</li>
+                            <li>Grid</li>
+                            <li>Animaciones</li>
+                            <li>Responsive</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pentesting -->
+                <div class="tech-card tech-security">
+                    <div class="tech-content">
+                        <div class="icon-box"><i class="fas fa-user-shield"></i></div>
+                        <span class="tech-name">Pentesting</span>
+                    </div>
+                    <div class="tech-details">
+                        <ul>
+                            <li>Nmap</li>
+                            <li>Metasploit</li>
+                            <li>Hydra</li>
+                            <li>Burp Suite</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: PROYECTOS (Con Modal y Slider) -->
         <section id="proyectos" class="fade-in">
             <h2>Proyectos Destacados</h2>
 
             <!-- PROYECTO 1 -->
-            <div class="card">
+            <div class="card project-card-trigger" data-title="Sistema CRUD para ONG"
+                data-desc="Aplicación web completa desarrollada con Python (Django) y MySQL. Este sistema permite registrar usuarios, gestionar roles, listar beneficiarios y visualizar estadísticas generales. Incluye autenticación segura."
+                data-tech="Python, Django, MySQL, Bootstrap" data-repo="https://github.com/tuusuario/proyecto1">
+
                 <div class="slider-wrapper">
                     <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-container">
-                        
-                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
-                            <img src="assets\img\img0-project1.png" alt="Login">
-                        </a>
-                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
-                            <img src="assets\img\img1-project1.png" alt="Dashboard">
-                        </a>
-                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
-                            <img src="assets\img\img2-project1.png" alt="Usuarios">
-                        <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="slider-item">
-                            <img src="assets\img\img3-project1.png" alt="Usuarios">
-                        </a>
+                        <div class="slider-item"><img src="assets\img\img0-project1.png"
+                                alt="Login"></div>
+                        <div class="slider-item"><img
+                                src="assets\img\img1-project1.png" alt="Dashboard">
+                        </div>
+                        <div class="slider-item"><img
+                                src="assets\img\img2-project1.png" alt="Usuarios">
+                        </div>
+                        <div class="slider-item"><img
+                                src="assets\img\img3-project1.png" alt="Formulario">
+                        </div>
                     </div>
                     <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
                 <div class="card-content">
                     <h3>Sistema CRUD para ONG</h3>
-                    <p>Aplicación web con Python (Django) y MySQL. Permite registrar usuarios, listar y ver datos
-                        generales.</p>
-                    <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="btn-repo">
+                    <p>Aplicación web con Python (Django) y MySQL. Haz clic para ver detalles.</p>
+                    <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="btn-repo no-modal">
                         Ver en GitHub <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
 
             <!-- PROYECTO 2 -->
-            <div class="card">
+            <div class="card project-card-trigger" data-title="Automatización en Linux"
+                data-desc="Script avanzado en Python y Bash diseñado para optimizar la organización de archivos. Clasifica descargas, limpia logs antiguos y realiza backups programados."
+                data-tech="Python, Bash, Linux, Cron" data-repo="https://github.com/tuusuario/proyecto2">
+
                 <div class="slider-wrapper">
                     <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-container">
-                        <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="slider-item">
-                            <img src="https://placehold.co/600x350/21262d/FCC624?text=Linux:+Terminal" alt="Terminal">
-                        </a>
-                        <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="slider-item">
-                            <img src="https://placehold.co/600x350/161b22/FCC624?text=Linux:+Codigo" alt="Código">
-                        </a>
+                        <div class="slider-item"><img
+                                src="https://placehold.co/600x350/21262d/FCC624?text=Linux:+Terminal" alt="Terminal">
+                        </div>
+                        <div class="slider-item"><img
+                                src="https://placehold.co/600x350/161b22/FCC624?text=Linux:+Codigo" alt="Código"></div>
                     </div>
                     <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
                 <div class="card-content">
                     <h3>Automatización en Linux</h3>
-                    <p>Script en Python diseñado para optimizar la organización de archivos y directorios en entornos
-                        Linux.</p>
-                    <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="btn-repo">
+                    <p>Script en Python y Bash para optimización de archivos.</p>
+                    <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="btn-repo no-modal">
                         Ver en GitHub <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
 
             <!-- PROYECTO 3 -->
-            <div class="card">
+            <div class="card project-card-trigger" data-title="Laboratorio de Pentesting"
+                data-desc="Informe técnico de un ejercicio de pentesting en la maquina SimpleCTF en plataforma TryHackMe. Explotación de vulnerabilidad en protocolo FTP y postexplotación por ssh con Hydra, se realiza escalada de privilegio por vulnerabilidad root en vim."
+                data-tech="Metasploit, Nmap, Hydra" data-repo="https://github.com/tuusuario/proyecto3">
+
                 <div class="slider-wrapper">
                     <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-container">
-                        <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="slider-item">
-                            <img src="https://placehold.co/600x350/21262d/00ff41?text=Pentest:+Escaneo" alt="Escaneo">
-                        </a>
-                        <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="slider-item">
-                            <img src="https://placehold.co/600x350/000000/00ff41?text=Pentest:+Reporte" alt="Reporte">
-                        </a>
+                        <div class="slider-item"><img
+                                src="https://placehold.co/600x350/21262d/00ff41?text=Pentest:+Escaneo" alt="Escaneo">
+                        </div>
+                        <div class="slider-item"><img
+                                src="https://placehold.co/600x350/000000/00ff41?text=Pentest:+Reporte" alt="Reporte">
+                        </div>
                     </div>
                     <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
                 <div class="card-content">
-                    <h3>Laboratorio de Pentesting</h3>
-                    <p>Informe detallado de un pentest simulado a un servicio FTP vulnerable (vsftpd 2.3.4) maquina: SimpleCTF.</p>
-                    <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="btn-repo">
+                    <h3>Laboratorio de Pentesting Maquina Simple CTF</h3>
+                    <p>Informe (Writeup) detallado de pentest simulado a servicio FTP.</p>
+                    <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="btn-repo no-modal">
                         Ver en GitHub <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -181,13 +315,40 @@
                             class="fab fa-linkedin"></i> LinkedIn</a></li>
             </ul>
             <p style="text-align: center;">
-                <a href="assets\docs\CV_Henry_Leyton.pdf" download class="btn-cv">
-                    <i class="fas fa-file-download"></i> Descargar mi CV
-                </a>
+                <a href="assets\docs\CV_Henry_Leyton.pdf" download class="btn-cv"><i class="fas fa-file-download"></i>
+                    Descargar mi CV</a>
             </p>
         </section>
 
     </main>
+
+    <!-- MODAL DE PROYECTOS -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+
+            <h2 id="modalTitle">Título del Proyecto</h2>
+
+            <!-- Galería Interactiva -->
+            <div class="modal-gallery-container">
+                <button class="modal-nav-btn prev-modal"><i class="fas fa-chevron-left"></i></button>
+
+                <img id="modalImg" class="modal-gallery-img" src="" alt="Vista Previa">
+
+                <button class="modal-nav-btn next-modal"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="modal-info">
+                <p id="modalDesc">Descripción detallada...</p>
+                <div class="modal-techs">
+                    <strong>Tecnologías:</strong> <span id="modalTech"></span>
+                </div>
+                <a id="modalRepo" href="#" target="_blank" class="btn-repo modal-btn">
+                    Ver Repositorio <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>© 2025 Henry Leyton González - Portafolio Personal</p>
