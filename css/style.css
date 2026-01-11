@@ -1,8 +1,11 @@
 /* =========================================
     1. ESTILOS GLOBALES
    ========================================= */
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* CRÍTICO: Evita el desplazamiento horizontal indeseado */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* Fondo transparente para ver el canvas de partículas */
     background-color: transparent; 
@@ -24,9 +27,11 @@ body {
 }
 
 .container {
-    padding: 9rem 2rem 3rem 2rem;
+    padding: 8rem 1.5rem 3rem 1.5rem; /* Ajustado para móviles */
     max-width: 1000px;
     margin: auto;
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding no sume al ancho */
 }
 
 h1, h2 {
@@ -42,7 +47,7 @@ h1, h2 {
 header {
     background: rgba(22, 27, 34, 0.95);
     backdrop-filter: blur(10px);
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     position: fixed;
     width: 100%;
     top: 0;
@@ -82,17 +87,11 @@ header nav a:hover {
     3. TERMINAL 3D (FLIP)
    ========================================= */
 .terminal-scene {
-    margin-top: 2.5rem;
     width: 100%;
-    
-    /* CAMBIO: Aumentado de 450px a 700px para que sea más ancha */
-    max-width: 700px; 
-    
-    /* CAMBIO: Aumentado de 240px a 400px para que sea más alta */
-    height: 400px;
-    
+    max-width: 700px; /* Ancho máximo en escritorio */
+    height: 400px;    /* Altura en escritorio */
     perspective: 1000px;
-    margin: 2.5rem auto; /* Esto es lo que la mantiene CENTRADA */
+    margin: 2.5rem auto;
 }
 
 .terminal-card {
@@ -176,6 +175,9 @@ header nav a:hover {
     font-family: 'Consolas', monospace;
     font-size: 1.1rem;
     color: #c9d1d9;
+    /* Ajustes de seguridad para texto largo */
+    word-wrap: break-word;
+    overflow-y: auto;
 }
 
 .cmd-keyword { color: #ff7b72; font-weight: bold; }
@@ -191,6 +193,7 @@ header nav a:hover {
     color: #00ff41;
     flex-grow: 1;
     overflow-y: auto;
+    word-break: break-all; /* Evita que comandos largos rompan el layout */
 }
 
 .output { margin-bottom: 10px; line-height: 1.4; }
@@ -199,12 +202,14 @@ header nav a:hover {
 .input-line {
     display: flex;
     align-items: center;
+    flex-wrap: wrap; /* Importante para móviles */
 }
 
 .prompt {
     color: #00ff41;
     margin-right: 8px;
     font-weight: bold;
+    white-space: nowrap; /* El prompt no se rompe */
 }
 
 #bashInput {
@@ -216,6 +221,7 @@ header nav a:hover {
     flex-grow: 1;
     outline: none;
     caret-color: #00ff41;
+    min-width: 50px;
 }
 
 /* =========================================
@@ -226,6 +232,7 @@ header nav a:hover {
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 2rem;
     margin-top: 2.5rem;
+    width: 100%;
 }
 
 .tech-card {
@@ -348,6 +355,7 @@ header nav a:hover {
     transition: all 0.4s;
     overflow: hidden;
     position: relative;
+    width: 100%; /* Asegura que no se salga */
 }
 
 .card:hover {
@@ -544,7 +552,132 @@ header nav a:hover {
 .modal-btn:hover { background: #2ea043; color: white; }
 
 /* =========================================
-    7. FOOTER & UTILIDADES
+    7. CONTACTO & FORMULARIO
+   ========================================= */
+.contact-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    width: 100%; /* Asegura que ocupe espacio en móvil */
+}
+
+/* Enlaces sociales */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.social-links a {
+    color: #c9d1d9;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.social-links a:hover { color: #58a6ff; }
+
+/* Formulario */
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    width: 100%; /* Importante para móvil */
+    background: rgba(22, 27, 34, 0.6);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-sizing: border-box; /* Evita que el padding rompa el ancho */
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #30363d;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #8b949e;
+    pointer-events: none;
+    transition: 0.3s ease all;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus,
+.form-group input:not(:placeholder-shown),
+.form-group textarea:not(:placeholder-shown) {
+    border-bottom-color: #58a6ff;
+}
+
+.form-group input:focus ~ label, 
+.form-group textarea:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+    top: -20px;
+    left: 0;
+    font-size: 0.85rem;
+    color: #58a6ff;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-submit:hover { background: #2ea043; }
+
+.email-copy {
+    cursor: pointer;
+    background: rgba(88, 166, 255, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background 0.3s;
+}
+.email-copy:hover { background: rgba(88, 166, 255, 0.2); }
+
+/* =========================================
+    8. FOOTER & UTILIDADES
    ========================================= */
 footer {
     text-align: center;
@@ -554,30 +687,6 @@ footer {
     color: #8b949e;
     border-top: 1px solid #30363d;
 }
-
-#contacto ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    justify-content: center;
-}
-
-#contacto ul li a {
-    color: #c9d1d9;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.03);
-}
-#contacto ul li a:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.07); }
-#contacto .link-github:hover { color: #ffffff; }
-#contacto ul li a i { font-size: 2.5rem; }
 
 .btn-cv {
     display: inline-block;
@@ -612,7 +721,7 @@ footer {
 @keyframes blinkCursor { from, to { opacity: 1; } 50% { opacity: 0; } }
 
 /* =========================================
-   8. MEJORAS DE UX (SCROLLSPY & TOASTS)
+    9. MEJORAS DE UX (SCROLLSPY & TOASTS)
    ========================================= */
 header nav a.active-link {
     color: #58a6ff;
@@ -661,27 +770,8 @@ header nav a.active-link::after {
 .toast.hide { animation: fadeOutToast 0.3s forwards; }
 @keyframes fadeOutToast { to { transform: translateX(100%); opacity: 0; } }
 
-#contacto p strong {
-    cursor: pointer;
-    transition: color 0.3s;
-    position: relative;
-}
-#contacto p strong:hover { color: #58a6ff; }
-#contacto p strong:hover::after {
-    content: 'Copiar';
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #161b22;
-    padding: 2px 8px;
-    font-size: 0.7rem;
-    border-radius: 4px;
-    border: 1px solid #30363d;
-}
-
 /* =========================================
-    9. RESPONSIVO (MÓVILES)
+    10. RESPONSIVO (MÓVILES)
    ========================================= */
 @media (max-width: 768px) {
     header nav {
@@ -703,168 +793,26 @@ header nav a.active-link::after {
         height: 250px;
     }
 
-    /* FIX TERMINAL MÓVIL */
+    /* Terminal Fix */
     .terminal-scene {
+        height: auto; /* Altura automática para que quepa el texto */
+        min-height: 250px;
         margin-bottom: 2rem;
+        /* IMPORTANTE: Desactivar efecto 3D en móviles si da problemas de overflow */
+        /* perspective: none; */ 
+    }
+    .terminal-card {
+        height: 350px; /* Altura fija razonable para móvil */
     }
 
-    .terminal-text,
-    .bash-body,
-    .output {
-        white-space: normal;
-        word-wrap: break-word;
-        word-break: break-word;
-        font-size: 0.85rem;
-        padding: 10px;
-    }
-
-    .input-line {
-        flex-wrap: wrap;
-        width: 100%;
-    }
-
-    #bashInput {
-        width: 100%;
-        min-width: 50px;
-    }
-    
-    #contacto ul { flex-direction: column; align-items: center; width: 100%; }
-    #contacto ul li { width: 100%; display: flex; justify-content: center; }
-    #contacto ul li a { flex-direction: row; width: 100%; max-width: 300px; justify-content: center; gap: 1rem; }
-}
-/* =========================================
-   10. ESTILOS DEL FORMULARIO DE CONTACTO
-   ========================================= */
-.contact-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 2rem;
-}
-
-.contact-info {
-    flex: 1;
-    min-width: 300px;
-    max-width: 450px;
-    text-align: left; /* Alineado a la izquierda para mejor lectura */
-}
-
-/* Enlaces sociales en fila */
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
-.social-links a {
-    color: #c9d1d9;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: color 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.social-links a:hover { color: #58a6ff; }
-
-/* El Formulario */
-.contact-form {
-    flex: 1;
-    min-width: 300px;
-    max-width: 450px;
-    background: rgba(22, 27, 34, 0.6);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid #30363d;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.form-group {
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-
-.form-group input, 
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #30363d;
-    color: #fff;
-    font-family: inherit;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s;
-    box-sizing: border-box; /* Importante para que no se salga */
-}
-
-.form-group label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: #8b949e;
-    pointer-events: none;
-    transition: 0.3s ease all;
-}
-
-/* Animación del Label (Input Focus o con texto) */
-.form-group input:focus, 
-.form-group textarea:focus,
-.form-group input:not(:placeholder-shown),
-.form-group textarea:not(:placeholder-shown) {
-    border-bottom-color: #58a6ff;
-}
-
-.form-group input:focus ~ label, 
-.form-group textarea:focus ~ label,
-.form-group input:not(:placeholder-shown) ~ label,
-.form-group textarea:not(:placeholder-shown) ~ label {
-    top: -20px;
-    left: 0;
-    font-size: 0.85rem;
-    color: #58a6ff;
-}
-
-.btn-submit {
-    width: 100%;
-    padding: 12px;
-    background: #238636;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-}
-.btn-submit:hover { background: #2ea043; }
-
-/* Ajuste específico para el email copiable */
-.email-copy {
-    cursor: pointer;
-    background: rgba(88, 166, 255, 0.1);
-    padding: 10px;
-    border-radius: 6px;
-    display: inline-block;
-    transition: background 0.3s;
-}
-.email-copy:hover { background: rgba(88, 166, 255, 0.2); }
-
-/* Responsivo para el contacto */
-@media (max-width: 768px) {
+    /* Ajuste de formulario y contacto en móvil */
     .contact-wrapper {
         flex-direction: column;
-        align-items: center;
+        gap: 2rem;
     }
     .contact-info, .contact-form {
-        text-align: center;
         width: 100%;
+        max-width: 100%;
     }
     .social-links {
         justify-content: center;
