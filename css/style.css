@@ -5,16 +5,14 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* CRÍTICO: Evita el desplazamiento horizontal indeseado */
+    overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Fondo transparente para ver el canvas de partículas */
     background-color: transparent; 
     color: #c9d1d9;
     line-height: 1.6;
     position: relative;
 }
 
-/* EL LIENZO DE FONDO */
 #particles-canvas {
     position: fixed;
     top: 0;
@@ -27,11 +25,11 @@ html, body {
 }
 
 .container {
-    padding: 8rem 1.5rem 3rem 1.5rem; /* Ajustado para móviles */
+    padding: 8rem 1.5rem 3rem 1.5rem;
     max-width: 1000px;
     margin: auto;
     width: 100%;
-    box-sizing: border-box; /* Asegura que el padding no sume al ancho */
+    box-sizing: border-box;
 }
 
 h1, h2 {
@@ -88,8 +86,8 @@ header nav a:hover {
    ========================================= */
 .terminal-scene {
     width: 100%;
-    max-width: 700px; /* Ancho máximo en escritorio */
-    height: 400px;    /* Altura en escritorio */
+    max-width: 700px;
+    height: 400px;
     perspective: 1000px;
     margin: 2.5rem auto;
 }
@@ -117,14 +115,12 @@ header nav a:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Front: Python */
 .front {
     background-color: #0d1117;
     border: 1px solid #30363d;
     transform: rotateY(0deg);
 }
 
-/* Back: Bash */
 .back {
     background-color: #0c0c0c;
     border: 1px solid #00ff41;
@@ -134,7 +130,6 @@ header nav a:hover {
     cursor: text;
 }
 
-/* Terminal UI */
 .terminal-header {
     background-color: #161b22;
     padding: 10px 15px;
@@ -169,13 +164,11 @@ header nav a:hover {
 .control.minimize { background-color: #ffbd2e; }
 .control.maximize { background-color: #27c93f; }
 
-/* Text Content */
 .terminal-text {
     padding: 20px;
     font-family: 'Consolas', monospace;
     font-size: 1.1rem;
     color: #c9d1d9;
-    /* Ajustes de seguridad para texto largo */
     word-wrap: break-word;
     overflow-y: auto;
 }
@@ -185,7 +178,6 @@ header nav a:hover {
 .cmd-action { color: #79c0ff; text-shadow: 0 0 10px rgba(121, 192, 255, 0.4); }
 .comment { color: #8b949e; font-size: 0.8rem; font-style: italic; }
 
-/* Bash Body */
 .bash-body {
     padding: 15px;
     font-family: 'Courier New', monospace;
@@ -193,7 +185,7 @@ header nav a:hover {
     color: #00ff41;
     flex-grow: 1;
     overflow-y: auto;
-    word-break: break-all; /* Evita que comandos largos rompan el layout */
+    word-break: break-all;
 }
 
 .output { margin-bottom: 10px; line-height: 1.4; }
@@ -202,14 +194,14 @@ header nav a:hover {
 .input-line {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; /* Importante para móviles */
+    flex-wrap: wrap;
 }
 
 .prompt {
     color: #00ff41;
     margin-right: 8px;
     font-weight: bold;
-    white-space: nowrap; /* El prompt no se rompe */
+    white-space: nowrap;
 }
 
 #bashInput {
@@ -272,7 +264,6 @@ header nav a:hover {
     color: #c9d1d9;
 }
 
-/* Details Hidden */
 .tech-details {
     opacity: 0;
     position: absolute;
@@ -305,7 +296,6 @@ header nav a:hover {
 
 .tech-details li:last-child { border-bottom: none; }
 
-/* Active State & Colors */
 .tech-card.active .tech-content {
     transform: translateY(-50px) scale(0.6);
     opacity: 0.5;
@@ -355,7 +345,7 @@ header nav a:hover {
     transition: all 0.4s;
     overflow: hidden;
     position: relative;
-    width: 100%; /* Asegura que no se salga */
+    width: 100%;
 }
 
 .card:hover {
@@ -571,7 +561,6 @@ header nav a:hover {
     width: 100%; /* Asegura que ocupe espacio en móvil */
 }
 
-/* Enlaces sociales */
 .social-links {
     display: flex;
     gap: 1rem;
@@ -593,13 +582,23 @@ header nav a:hover {
     flex: 1;
     min-width: 300px;
     max-width: 450px;
-    width: 100%; /* Importante para móvil */
+    width: 100%; 
     background: rgba(22, 27, 34, 0.6);
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid #30363d;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    box-sizing: border-box; /* Evita que el padding rompa el ancho */
+    box-sizing: border-box; 
+}
+
+/* NUEVO: ESTILO PARA EL TÍTULO DEL FORMULARIO */
+.form-title {
+    color: #58a6ff;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    border-bottom: none; /* Quitamos borde si lo hubiera por h2 */
 }
 
 .form-group {
@@ -795,14 +794,12 @@ header nav a.active-link::after {
 
     /* Terminal Fix */
     .terminal-scene {
-        height: auto; /* Altura automática para que quepa el texto */
+        height: auto; 
         min-height: 250px;
         margin-bottom: 2rem;
-        /* IMPORTANTE: Desactivar efecto 3D en móviles si da problemas de overflow */
-        /* perspective: none; */ 
     }
     .terminal-card {
-        height: 350px; /* Altura fija razonable para móvil */
+        height: 350px; 
     }
 
     /* Ajuste de formulario y contacto en móvil */

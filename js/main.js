@@ -18,7 +18,7 @@ if (faders.length > 0) {
 const typewriterElement = document.getElementById("typewriter");
 if (typewriterElement) {
     const text = "HENRY ALEXANDER LEYTON GONZÁLEZ";
-    const speed = 50; 
+    const speed = 30; 
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
@@ -128,6 +128,7 @@ function renderProjects() {
 }
 
 function initializeProjectInteractions() {
+    // Sliders
     document.querySelectorAll('.slider-wrapper').forEach(slider => {
         const container = slider.querySelector('.slider-container');
         const nextBtn = slider.querySelector('.next-btn');
@@ -143,6 +144,7 @@ function initializeProjectInteractions() {
         });
     });
 
+    // Modal Triggers
     const projectCards = document.querySelectorAll(".project-card-trigger");
     const closeModal = document.querySelector(".close-modal");
     const prevModalBtn = document.querySelector(".prev-modal");
@@ -150,7 +152,9 @@ function initializeProjectInteractions() {
 
     projectCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            if (e.target.closest('.no-modal') || e.target.closest('.slider-btn') || e.target.closest('.slider-item')) return;
+            // CAMBIO: Ahora permitimos click en .slider-item (imágenes)
+            // Solo bloqueamos click si es en botones o enlaces específicos
+            if (e.target.closest('.no-modal') || e.target.closest('.slider-btn')) return;
             
             const mTitle = document.getElementById("modalTitle");
             const mDesc = document.getElementById("modalDesc");
@@ -192,7 +196,7 @@ document.querySelectorAll('.tech-card').forEach(card => {
 });
 
 // ==========================================
-// 4. TERMINAL 3D
+// 4. TERMINAL 3D AVANZADA
 // ==========================================
 const terminalCard = document.getElementById('terminalCard');
 const bashInput = document.getElementById('bashInput');
@@ -393,6 +397,7 @@ if (canvas) {
     window.addEventListener('resize', () => {
         canvas.width = innerWidth;
         canvas.height = innerHeight;
+        mouse.radius = (canvas.height / 80) * (canvas.width / 80);
         initParticles();
     });
 
@@ -457,8 +462,8 @@ if (contactForm) {
         btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
         // REEMPLAZA ESTOS VALORES CON LOS DE TU CUENTA DE EMAILJS
-        const serviceID = 'service_uzp73up';
-        const templateID = 'template_t2ogwhy';
+        const serviceID = 'TU_SERVICE_ID'; // EJEMPLO: 'service_z3x9...'
+        const templateID = 'TU_TEMPLATE_ID'; // EJEMPLO: 'template_k4j...'
 
         emailjs.sendForm(serviceID, templateID, this)
             .then(() => {
