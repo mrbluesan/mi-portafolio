@@ -2,7 +2,6 @@
 // 1. CONFIGURACIÓN INICIAL & EFECTOS BASES
 // ==========================================
 
-// Scroll Fade-In
 const faders = document.querySelectorAll('.fade-in');
 if (faders.length > 0) {
     const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
@@ -16,11 +15,10 @@ if (faders.length > 0) {
     faders.forEach(fader => { appearOnScroll.observe(fader); });
 }
 
-// Typewriter
 const typewriterElement = document.getElementById("typewriter");
 if (typewriterElement) {
     const text = "HENRY ALEXANDER LEYTON GONZÁLEZ";
-    const speed = 30; 
+    const speed = 50; 
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
@@ -35,7 +33,7 @@ if (typewriterElement) {
 }
 
 // ==========================================
-// 2. DATOS DE MIS PROYECTOS (JSON)
+// 2. DATOS DE PROYECTOS (JSON)
 // ==========================================
 const myProjects = [
     {
@@ -75,7 +73,7 @@ const myProjects = [
 ];
 
 // ==========================================
-// 3. RENDERIZADO Y EVENTOS (Proyectos, Modal, Slider)
+// 3. RENDERIZADO Y EVENTOS
 // ==========================================
 
 let currentModalImages = [];
@@ -130,7 +128,6 @@ function renderProjects() {
 }
 
 function initializeProjectInteractions() {
-    // Sliders
     document.querySelectorAll('.slider-wrapper').forEach(slider => {
         const container = slider.querySelector('.slider-container');
         const nextBtn = slider.querySelector('.next-btn');
@@ -146,8 +143,11 @@ function initializeProjectInteractions() {
         });
     });
 
-    // Modal Triggers
     const projectCards = document.querySelectorAll(".project-card-trigger");
+    const closeModal = document.querySelector(".close-modal");
+    const prevModalBtn = document.querySelector(".prev-modal");
+    const nextModalBtn = document.querySelector(".next-modal");
+
     projectCards.forEach(card => {
         card.addEventListener('click', (e) => {
             if (e.target.closest('.no-modal') || e.target.closest('.slider-btn') || e.target.closest('.slider-item')) return;
@@ -170,35 +170,29 @@ function initializeProjectInteractions() {
             if(modal) modal.style.display = "block";
         });
     });
+
+    if(prevModalBtn) prevModalBtn.onclick = () => {
+        if (currentModalImages.length > 0) {
+            currentImageIndex = (currentImageIndex - 1 + currentModalImages.length) % currentModalImages.length;
+            updateModalImage();
+        }
+    };
+    if(nextModalBtn) nextModalBtn.onclick = () => {
+        if (currentModalImages.length > 0) {
+            currentImageIndex = (currentImageIndex + 1) % currentModalImages.length;
+            updateModalImage();
+        }
+    };
+    if(closeModal) closeModal.addEventListener('click', () => modal.style.display = "none");
+    window.addEventListener('click', (e) => { if (e.target == modal) modal.style.display = "none"; });
 }
 
-// Modal Controles
-const prevModalBtn = document.querySelector(".prev-modal");
-const nextModalBtn = document.querySelector(".next-modal");
-const closeModal = document.querySelector(".close-modal");
-
-if(prevModalBtn) prevModalBtn.onclick = () => {
-    if (currentModalImages.length > 0) {
-        currentImageIndex = (currentImageIndex - 1 + currentModalImages.length) % currentModalImages.length;
-        updateModalImage();
-    }
-};
-if(nextModalBtn) nextModalBtn.onclick = () => {
-    if (currentModalImages.length > 0) {
-        currentImageIndex = (currentImageIndex + 1) % currentModalImages.length;
-        updateModalImage();
-    }
-};
-if(closeModal) closeModal.addEventListener('click', () => modal.style.display = "none");
-window.addEventListener('click', (e) => { if (e.target == modal) modal.style.display = "none"; });
-
-// Skills Interactivos
 document.querySelectorAll('.tech-card').forEach(card => {
     card.addEventListener('click', () => card.classList.toggle('active'));
 });
 
 // ==========================================
-// 4. TERMINAL 3D AVANZADA
+// 4. TERMINAL 3D
 // ==========================================
 const terminalCard = document.getElementById('terminalCard');
 const bashInput = document.getElementById('bashInput');
@@ -231,7 +225,6 @@ if (terminalCard && bashInput && bashBody) {
         if (e.key === 'Enter') {
             const command = this.value.trim().toLowerCase();
             const originalCmd = this.value; 
-            
             const historyLine = document.createElement('div');
             historyLine.innerHTML = `<span class="prompt">root@kali:~$</span> ${originalCmd}`;
             bashBody.insertBefore(historyLine, this.parentElement);
@@ -241,9 +234,7 @@ if (terminalCard && bashInput && bashBody) {
                 case 'help': printTerminal("Comandos: <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); break;
                 case 'whoami': printTerminal("Henry Leyton - CyberSec & Dev"); break;
                 case 'ls': printTerminal("Skills/<br>Python&nbsp;&nbsp;C#&nbsp;&nbsp;SQL&nbsp;&nbsp;Linux&nbsp;&nbsp;Git&nbsp;&nbsp;Pentesting"); break;
-                case 'ifconfig':
-                    printTerminal(`eth0: flags=4163&lt;UP&gt; mtu 1500<br>inet 192.168.1.15<br><br>tun0: flags=4305&lt;UP&gt; mtu 1500<br>inet 10.10.14.23 <span style="color: #98c379"># VPN</span>`);
-                    break;
+                case 'ifconfig': printTerminal(`eth0: flags=4163&lt;UP&gt; mtu 1500<br>inet 192.168.1.15<br><br>tun0: flags=4305&lt;UP&gt; mtu 1500<br>inet 10.10.14.23 <span style="color: #98c379"># VPN</span>`); break;
                 case 'scan':
                     printTerminal("Starting Nmap 7.94...");
                     setTimeout(() => {
@@ -296,7 +287,7 @@ if (terminalCard && bashInput && bashBody) {
 }
 
 // ==========================================
-// 5. FONDO DE PARTÍCULAS (RED)
+// 5. FONDO DE PARTÍCULAS
 // ==========================================
 const canvas = document.getElementById("particles-canvas");
 if (canvas) {
@@ -409,9 +400,7 @@ if (canvas) {
     animateParticles();
 }
 
-// ==========================================
-// 6. UX & FORMULARIO
-// ==========================================
+// 6. UX (ScrollSpy & Toast)
 function showToast(message) {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -427,57 +416,6 @@ function showToast(message) {
         toast.classList.add('hide');
         toast.addEventListener('animationend', () => toast.remove());
     }, 3000);
-}
-
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener("submit", async function(event) {
-        event.preventDefault();
-        console.log("🚀 Enviando formulario...");
-        
-        const actionUrl = event.target.action;
-        if (!actionUrl || actionUrl.includes('TU_CODIGO_FORMSPREE')) {
-            showToast('Error: Configura el Formspree en el HTML.');
-            return;
-        }
-
-        const btnSubmit = document.querySelector('.btn-submit');
-        const originalText = btnSubmit.innerHTML;
-        const data = new FormData(event.target);
-
-        btnSubmit.disabled = true;
-        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-
-        try {
-            const response = await fetch(actionUrl, {
-                method: contactForm.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                showToast('¡Mensaje enviado con éxito! 🚀');
-                contactForm.reset();
-                btnSubmit.innerHTML = 'Enviado <i class="fas fa-check"></i>';
-                btnSubmit.style.background = '#238636';
-            } else {
-                showToast('Hubo un problema al enviar.');
-                btnSubmit.innerHTML = 'Error ❌';
-                btnSubmit.style.background = '#ff5f56';
-            }
-        } catch (error) {
-            console.error(error);
-            showToast('Error de conexión.');
-            btnSubmit.innerHTML = 'Error ❌';
-            btnSubmit.style.background = '#ff5f56';
-        }
-
-        setTimeout(() => {
-            btnSubmit.disabled = false;
-            btnSubmit.innerHTML = originalText;
-            btnSubmit.style.background = '#238636';
-        }, 3000);
-    });
 }
 
 function initScrollSpy() {
@@ -500,6 +438,47 @@ if(emailElement) {
     emailElement.addEventListener('click', () => {
         const emailText = emailElement.querySelector('strong').textContent;
         navigator.clipboard.writeText(emailText).then(() => showToast('¡Correo copiado!'));
+    });
+}
+
+// 7. MANEJO DEL FORMULARIO CON EMAILJS
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        console.log("Enviando formulario con EmailJS...");
+
+        const btnSubmit = document.querySelector('.btn-submit');
+        const originalText = btnSubmit.innerHTML;
+
+        // Estado de carga
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+        // REEMPLAZA ESTOS VALORES CON LOS DE TU CUENTA DE EMAILJS
+        const serviceID = 'service_uzp73up';
+        const templateID = 'template_t2ogwhy';
+
+        emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+                showToast('¡Mensaje enviado con éxito!');
+                contactForm.reset();
+                btnSubmit.innerHTML = 'Enviado <i class="fas fa-check"></i>';
+                btnSubmit.style.background = '#238636';
+            }, (err) => {
+                console.error("Error de EmailJS:", err);
+                showToast('Hubo un problema al enviar.');
+                btnSubmit.innerHTML = 'Error';
+                btnSubmit.style.background = '#ff5f56';
+            })
+            .finally(() => {
+                 setTimeout(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = originalText;
+                    btnSubmit.style.background = '#238636';
+                }, 3000);
+            });
     });
 }
 

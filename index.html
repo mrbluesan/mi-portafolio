@@ -23,6 +23,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         xintegrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- ===== EMAILJS SDK ===== -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // INICIALIZACIÓN DE EMAILJS
+            // ¡IMPORTANTE! Reemplaza "TU_PUBLIC_KEY" con la clave pública de tu cuenta de EmailJS
+            emailjs.init({
+              publicKey: "okoyudz-SDZEDqVuF",
+            });
+        })();
+    </script>
 </head>
 
 <body>
@@ -207,17 +219,20 @@
                     </a>
                 </div>
 
-                <!-- Formulario -->
-                <form id="contactForm" action="https://formspree.io/f/xvzzpjpe" method="POST" class="contact-form">
+                <!-- Formulario preparado para EmailJS -->
+                <form id="contactForm" class="contact-form">
                     <div class="form-group">
+                        <!-- 'name' debe coincidir con la variable en tu plantilla EmailJS: {{name}} -->
                         <input type="text" id="name" name="name" required placeholder=" ">
                         <label for="name">Nombre</label>
                     </div>
                     <div class="form-group">
+                        <!-- 'name' debe coincidir con: {{email}} -->
                         <input type="email" id="email" name="email" required placeholder=" ">
                         <label for="email">Correo Electrónico</label>
                     </div>
                     <div class="form-group">
+                        <!-- 'name' debe coincidir con: {{message}} -->
                         <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
                         <label for="message">Mensaje</label>
                     </div>
