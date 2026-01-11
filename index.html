@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Henry Leyton</title>
+    
+    <!-- ===== SEO ===== -->
+    <title>Portafolio - Henry Leyton | Desarrollador & Pentester</title>
+    <meta name="description" content="Portafolio de Henry Leyton. Desarrollador de Software y especialista en Ciberseguridad.">
+    <meta name="author" content="Henry Leyton">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Portafolio - Henry Leyton">
+    <meta property="og:description" content="Mira mis proyectos de desarrollo y ciberseguridad.">
+    <meta property="og:image" content="assets/img/preview-portfolio.png"> 
+    <meta property="og:url" content="https://mrbluesan.github.io/mi-portafolio/">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" type="image/x-icon">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         xintegrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
@@ -12,6 +26,9 @@
 </head>
 
 <body>
+    <!-- CANVAS PARA EL FONDO DE PARTÍCULAS -->
+    <canvas id="particles-canvas"></canvas>
+
     <header>
         <nav>
             <h2 id="typewriter"></h2>
@@ -26,67 +43,61 @@
 
     <main class="container">
 
-        <!-- SECCIÓN 1: SOBRE MÍ + TERMINAL 3D -->
-        <section id="sobre-mi" class="fade-in">
-            <!-- WIDGET FLIP TERMINAL -->
-            <div class="terminal-scene">
-                <div class="terminal-card" id="terminalCard">
-
-                    <!-- CARA FRONTAL (Python) -->
-                    <div class="terminal-face front">
-                        <div class="terminal-header">
-                            <div class="terminal-title">main.py</div>
-                            <div class="terminal-controls">
-                                <div class="control close"></div>
-                                <div class="control minimize"></div>
-                                <div class="control maximize"></div>
-                            </div>
-                        </div>
-                        <div class="terminal-text">
-                            <span class="cmd-keyword">if</span> <span class="cmd-func">puedes_imaginarlo</span>():<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmd-action">puedes_programarlo</span>()
-                            <br><br>
-                            <span class="comment"># Haz clic para abrir consola >_</span>
+        <!-- TERMINAL 3D -->
+        <div class="terminal-scene">
+            <div class="terminal-card" id="terminalCard">
+                <div class="terminal-face front">
+                    <div class="terminal-header">
+                        <div class="terminal-title">main.py</div>
+                        <div class="terminal-controls">
+                            <div class="control close"></div>
+                            <div class="control minimize"></div>
+                            <div class="control maximize"></div>
                         </div>
                     </div>
-
-                    <!-- CARA TRASERA (Bash) -->
-                    <div class="terminal-face back">
-                        <div class="terminal-header bash-header">
-                            <div class="terminal-title">root@kali:~</div>
-                            <div class="terminal-controls">
-                                <div class="control close" id="closeTerminal"></div>
-                            </div>
+                    <div class="terminal-text">
+                        <span class="cmd-keyword">if</span> <span class="cmd-func">puedes_imaginarlo</span>():<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmd-action">puedes_programarlo</span>()
+                        <br><br>
+                        <span class="comment"># Haz clic para abrir consola >_</span>
+                    </div>
+                </div>
+                <div class="terminal-face back">
+                    <div class="terminal-header bash-header">
+                        <div class="terminal-title">root@kali:~</div>
+                        <div class="terminal-controls">
+                            <div class="control close" id="closeTerminal"></div>
                         </div>
-                        <div class="bash-body" id="bashBody">
-                            <div class="output">
-                                Henry's Shell v1.0<br>
-                                Type <span class="cmd-highlight">'help'</span> for commands.
-                            </div>
-                            <div class="input-line">
-                                <span class="prompt">root@kali:~$</span>
-                                <input type="text" id="bashInput" autocomplete="off" autofocus>
-                            </div>
+                    </div>
+                    <div class="bash-body" id="bashBody">
+                        <div class="output">
+                            Henry's Shell v1.0<br>
+                            Type <span class="cmd-highlight">'help'</span> for commands.
+                        </div>
+                        <div class="input-line">
+                            <span class="prompt">root@kali:~$</span>
+                            <input type="text" id="bashInput" autocomplete="off" autofocus>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- SECCIÓN 1: SOBRE MÍ -->
+        <section id="sobre-mi" class="fade-in">
             <h1>Sobre mi</h1>
             <p>
-                Soy estudiante de Ingeniería de Ejecución en Informática Mención Desarrollo de Sistemas, apasionado por la automatización y la eficiencia. Mi fuerte es Python, lenguaje con el que he desarrollado herramientas de gestión, scripts operativos y soluciones de escritorio integradas con bases de datos SQL. Mi curiosidad técnica me ha llevado a explorar más allá del código: gestiono entornos Linux, utilizo herramientas de ciberseguridad para fortalecer mis desarrollos y actualmente estoy incursionando en el mundo móvil con Kotlin. Busco un entorno donde pueda aportar mi capacidad analítica para resolver problemas reales, mientras continúo evolucionando hacia arquitecturas de software más robustas y escalables.
+                Soy estudiante de Ingeniería de Ejecución en Informática Mención Desarrollo de Sistemas, apasionado por la automatización y la eficiencia. Mi fuerte es Python, lenguaje con el que he desarrollado herramientas de gestión, scripts operativos y soluciones de escritorio integradas con bases de datos SQL. Mi curiosidad técnica me ha llevado a explorar más allá del código: gestiono entornos Linux, utilizo herramientas de ciberseguridad para fortalecer mis desarrollos y actualmente estoy incursionando en el mundo móvil con Kotlin.
             </p>
-
-            
         </section>
 
-        <!-- SECCIÓN 2: SKILLS INTERACTIVOS -->
+        <!-- SECCIÓN 2: SKILLS -->
         <section id="tecnologias" class="fade-in">
             <h2>Stack Tecnológico</h2>
             <p style="text-align: center; color: #8b949e; font-size: 0.9rem; margin-bottom: 2rem;">
                 <i class="fas fa-hand-pointer"></i> Haz clic en las tarjetas para ver librerías
             </p>
             <div class="tech-grid">
-
                 <!-- Python -->
                 <div class="tech-card tech-python">
                     <div class="tech-content">
@@ -94,14 +105,9 @@
                         <span class="tech-name">Python</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>Django</li>
-                            <li>ciberseguridad</li>
-                            <li>Scripting</li>
-                        </ul>
+                        <ul><li>Django</li><li>Ciberseguridad</li><li>Scripting</li></ul>
                     </div>
                 </div>
-
                 <!-- C# -->
                 <div class="tech-card tech-csharp">
                     <div class="tech-content">
@@ -109,13 +115,9 @@
                         <span class="tech-name">C# .NET</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>.NET Core</li>
-                            <li>WinForms</li>
-                        </ul>
+                        <ul><li>.NET Core</li><li>WinForms</li></ul>
                     </div>
                 </div>
-
                 <!-- SQL -->
                 <div class="tech-card tech-sql">
                     <div class="tech-content">
@@ -123,14 +125,9 @@
                         <span class="tech-name">SQL</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>MySQL</li>
-                            <li>SQLite</li>
-                            <li>Relacional</li>
-                        </ul>
+                        <ul><li>MySQL</li><li>SQLite</li><li>Relacional</li></ul>
                     </div>
                 </div>
-
                 <!-- Linux -->
                 <div class="tech-card tech-linux">
                     <div class="tech-content">
@@ -138,15 +135,9 @@
                         <span class="tech-name">Linux</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>Bash</li>
-                            <li>Permisos</li>
-                            <li>Parrot Os</li>
-                            <li>Kali</li>
-                        </ul>
+                        <ul><li>Bash</li><li>Permisos</li><li>Parrot OS</li><li>Kali</li></ul>
                     </div>
                 </div>
-
                 <!-- Git -->
                 <div class="tech-card tech-git">
                     <div class="tech-content">
@@ -154,14 +145,9 @@
                         <span class="tech-name">Git</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>GitHub</li>
-                            <li>Branches</li>
-                            <li>Git bash</li>
-                        </ul>
+                        <ul><li>GitHub</li><li>Branches</li><li>Git Bash</li></ul>
                     </div>
                 </div>
-
                 <!-- HTML5 -->
                 <div class="tech-card tech-html">
                     <div class="tech-content">
@@ -169,14 +155,9 @@
                         <span class="tech-name">HTML5</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>Semántica</li>
-                            <li>Accesibilidad</li>
-                            <li>Canvas</li>
-                        </ul>
+                        <ul><li>Semántica</li><li>Accesibilidad</li><li>Canvas</li></ul>
                     </div>
                 </div>
-
                 <!-- CSS3 -->
                 <div class="tech-card tech-css">
                     <div class="tech-content">
@@ -184,15 +165,9 @@
                         <span class="tech-name">CSS3</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>Flexbox</li>
-                            <li>Grid</li>
-                            <li>Animaciones</li>
-                            <li>Responsive</li>
-                        </ul>
+                        <ul><li>Flexbox</li><li>Grid</li><li>Animaciones</li></ul>
                     </div>
                 </div>
-
                 <!-- Pentesting -->
                 <div class="tech-card tech-security">
                     <div class="tech-content">
@@ -200,167 +175,80 @@
                         <span class="tech-name">Pentesting</span>
                     </div>
                     <div class="tech-details">
-                        <ul>
-                            <li>Nmap</li>
-                            <li>Metasploit</li>
-                            <li>Hydra</li>
-                            <li>Burp Suite</li>
-                        </ul>
+                        <ul><li>Nmap</li><li>Metasploit</li><li>Hydra</li><li>Burp Suite</li></ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: PROYECTOS (Con Modal y Slider) -->
+        <!-- SECCIÓN 3: PROYECTOS DINÁMICOS -->
         <section id="proyectos" class="fade-in">
             <h2>Proyectos Destacados</h2>
-
-            <!-- PROYECTO 1 -->
-            <div class="card project-card-trigger" data-title="Sistema CRUD para ONG"
-                data-desc="Aplicación web completa desarrollada con Python (Django) y MySQL. Este sistema permite registrar usuarios, gestionar roles, listar beneficiarios y visualizar estadísticas generales. Incluye autenticación segura."
-                data-tech="Python, Django, MySQL, Bootstrap" data-repo="https://github.com/tuusuario/proyecto1">
-
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <div class="slider-container">
-                        <div class="slider-item"><img src="assets\img\img0-project1.png"
-                                alt="Login"></div>
-                        <div class="slider-item"><img
-                                src="assets\img\img1-project1.png" alt="Dashboard">
-                        </div>
-                        <div class="slider-item"><img
-                                src="assets\img\img2-project1.png" alt="Usuarios">
-                        </div>
-                        <div class="slider-item"><img
-                                src="assets\img\img3-project1.png" alt="Formulario">
-                        </div>
-                        <div class="slider-item"><img
-                                src="assets\img\img4-project1.png" alt="Formulario">
-                        </div>
-                        <div class="slider-item"><img
-                                src="assets\img\img5-project1.png" alt="Formulario">
-                        </div>
-                    </div>
-                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-
-                <div class="card-content">
-                    <h3>Sistema CRUD para ONG</h3>
-                    <p>Aplicación web con Python (Django) y MySQL. Haz clic para ver detalles.</p>
-                    <a href="https://github.com/tuusuario/proyecto1" target="_blank" class="btn-repo no-modal">
-                        Ver en GitHub <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- PROYECTO 2 -->
-            <div class="card project-card-trigger" data-title="Automatización en Linux"
-                data-desc="Script avanzado en Python y Bash diseñado para optimizar la organización de archivos. Clasifica descargas, limpia logs antiguos y realiza backups programados."
-                data-tech="Python, Bash, Linux, Cron" data-repo="https://github.com/tuusuario/proyecto2">
-
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <div class="slider-container">
-                        <div class="slider-item"><img
-                                src="https://placehold.co/600x350/21262d/FCC624?text=Linux:+Terminal" alt="Terminal">
-                        </div>
-                        <div class="slider-item"><img
-                                src="https://placehold.co/600x350/161b22/FCC624?text=Linux:+Codigo" alt="Código"></div>
-                    </div>
-                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-
-                <div class="card-content">
-                    <h3>Automatización en Linux</h3>
-                    <p>Script en Python y Bash para optimización de archivos.</p>
-                    <a href="https://github.com/tuusuario/proyecto2" target="_blank" class="btn-repo no-modal">
-                        Ver en GitHub <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- PROYECTO 3 -->
-            <div class="card project-card-trigger" data-title="Laboratorio de Pentesting"
-                data-desc="Informe técnico de un ejercicio de pentesting en la maquina SimpleCTF en plataforma TryHackMe. Explotación de vulnerabilidad en protocolo FTP y postexplotación por ssh con Hydra, se realiza escalada de privilegio por vulnerabilidad root en vim."
-                data-tech="Metasploit, Nmap, Hydra" data-repo="https://github.com/tuusuario/proyecto3">
-
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <div class="slider-container">
-                        <div class="slider-item"><img
-                                src="https://placehold.co/600x350/21262d/00ff41?text=Pentest:+Escaneo" alt="Escaneo">
-                        </div>
-                        <div class="slider-item"><img
-                                src="https://placehold.co/600x350/000000/00ff41?text=Pentest:+Reporte" alt="Reporte">
-                        </div>
-                    </div>
-                    <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-
-                <div class="card-content">
-                    <h3>Laboratorio de Pentesting Maquina Simple CTF</h3>
-                    <p>Informe (Writeup) detallado de pentest simulado a servicio FTP.</p>
-                    <a href="https://github.com/tuusuario/proyecto3" target="_blank" class="btn-repo no-modal">
-                        Ver en GitHub <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
+            <div id="projects-container"></div>
         </section>
 
         <!-- SECCIÓN 4: CONTACTO -->
         <section id="contacto" class="fade-in">
             <h2>Contacto</h2>
-            <p>Puedes contactarme a través de mi correo electrónico: <strong>henryalexanderleyton@gmail.com</strong></p>
-            <p>O encontrarme en mis perfiles profesionales:</p>
-            <ul>
-                <li><a href="https://github.com/mrbluesan" class="link-github" target="_blank"><i
-                            class="fab fa-github"></i> GitHub</a></li>
-                <li><a href="https://tryhackme.com/p/bsan" class="link-thm" target="_blank"><i
-                            class="fas fa-shield-alt"></i> TryHackMe</a></li>
-                <li><a href="https://www.linkedin.com/in/henry-leyton-gonz%C3%A1lez-97270717b/" class="link-linkedin" target="_blank"><i
-                            class="fab fa-linkedin"></i> LinkedIn</a></li>
-            </ul>
-            <p style="text-align: center;">
-                <a href="assets\docs\CV_Henry_Leyton.pdf" download class="btn-cv"><i class="fas fa-file-download"></i>
-                    Descargar mi CV</a>
-            </p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <p>¿Tienes un proyecto en mente o quieres hablar de seguridad? ¡Escríbeme!</p>
+                    <p class="email-copy" id="emailCopy">
+                        <i class="fas fa-envelope"></i> <strong>henryalexanderleyton@gmail.com</strong>
+                    </p>
+                    <div class="social-links">
+                        <a href="https://github.com/mrbluesan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://tryhackme.com/p/bsan" target="_blank"><i class="fas fa-shield-alt"></i> TryHackMe</a>
+                        <a href="https://www.linkedin.com/in/henry-leyton-gonz%C3%A1lez-97270717b/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                    <a href="assets/docs/CV_Henry_Leyton.pdf" download class="btn-cv">
+                        <i class="fas fa-file-download"></i> Descargar mi CV
+                    </a>
+                </div>
+
+                <!-- Formulario -->
+                <form id="contactForm" action="https://formspree.io/f/xvzzpjpe" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder=" ">
+                        <label for="name">Nombre</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder=" ">
+                        <label for="email">Correo Electrónico</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+                        <label for="message">Mensaje</label>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        Enviar Mensaje <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
         </section>
 
     </main>
 
-    <!-- MODAL DE PROYECTOS -->
+    <!-- MODAL -->
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-
-            <h2 id="modalTitle">Título del Proyecto</h2>
-
-            <!-- Galería Interactiva -->
+            <h2 id="modalTitle">Título</h2>
             <div class="modal-gallery-container">
                 <button class="modal-nav-btn prev-modal"><i class="fas fa-chevron-left"></i></button>
-
                 <img id="modalImg" class="modal-gallery-img" src="" alt="Vista Previa">
-
                 <button class="modal-nav-btn next-modal"><i class="fas fa-chevron-right"></i></button>
             </div>
-
             <div class="modal-info">
-                <p id="modalDesc">Descripción detallada...</p>
-                <div class="modal-techs">
-                    <strong>Tecnologías:</strong> <span id="modalTech"></span>
-                </div>
-                <a id="modalRepo" href="#" target="_blank" class="btn-repo modal-btn">
-                    Ver Repositorio <i class="fab fa-github"></i>
-                </a>
+                <p id="modalDesc">Descripción...</p>
+                <div class="modal-techs"><strong>Tecnologías:</strong> <span id="modalTech"></span></div>
+                <a id="modalRepo" href="#" target="_blank" class="btn-repo modal-btn">Ver Repositorio <i class="fab fa-github"></i></a>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>© 2025 Henry Leyton González - Portafolio Personal</p>
-    </footer>
+    <footer><p>© 2025 Henry Leyton González - Portafolio Personal</p></footer>
     <script src="js/main.js"></script>
 </body>
-
 </html>
