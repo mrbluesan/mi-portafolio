@@ -64,7 +64,7 @@ const myProjects = [
         title: "Laboratorio de Pentesting",
         desc: "Informe técnico de un ejercicio de pentesting en la maquina SimpleCTF en plataforma TryHackMe. Explotación de vulnerabilidad en protocolo FTP y postexplotación por ssh con Hydra.",
         tech: "Metasploit, Nmap, Hydra",
-        repo: "https://github.com/mrbluesan/proyecto3",
+        repo: "https://github.com/mrbluesan/Ciberseguridad-Writeups/blob/main/TryHackMe/SimpleCTF.md",
         images: [
             "https://placehold.co/600x350/21262d/00ff41?text=Pentest:+Escaneo",
             "https://placehold.co/600x350/000000/00ff41?text=Pentest:+Reporte"
