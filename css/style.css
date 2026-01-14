@@ -25,7 +25,7 @@ html, body {
 }
 
 .container {
-    padding: 8rem 1.5rem 3rem 1.5rem;
+    padding: 9rem 2rem 3rem 2rem;
     max-width: 1000px;
     margin: auto;
     width: 100%;
@@ -45,7 +45,7 @@ h1, h2 {
 header {
     background: rgba(22, 27, 34, 0.95);
     backdrop-filter: blur(10px);
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
     position: fixed;
     width: 100%;
     top: 0;
@@ -307,7 +307,7 @@ header nav a:hover {
     pointer-events: all;
 }
 
-/* Colores específicos activos/hover */
+/* Colores específicos */
 .tech-python:hover, .tech-python.active { border-color: #3776AB; background: rgba(55, 118, 171, 0.15); }
 .tech-python:hover .icon-box, .tech-python.active .icon-box { color: #3776AB; }
 
@@ -429,7 +429,7 @@ header nav a:hover {
 .project-card-trigger { cursor: pointer; }
 
 /* =========================================
-    6. MODAL (POPUP) MEJORADO
+    6. MODAL (POPUP)
    ========================================= */
 .modal {
     display: none;
@@ -558,7 +558,7 @@ header nav a:hover {
     flex: 1;
     min-width: 300px;
     max-width: 450px;
-    width: 100%; /* Asegura que ocupe espacio en móvil */
+    width: 100%;
 }
 
 .social-links {
@@ -582,23 +582,23 @@ header nav a:hover {
     flex: 1;
     min-width: 300px;
     max-width: 450px;
-    width: 100%; 
+    width: 100%;
     background: rgba(22, 27, 34, 0.6);
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid #30363d;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
-/* NUEVO: ESTILO PARA EL TÍTULO DEL FORMULARIO */
+/* TITULO FORMULARIO */
 .form-title {
     color: #58a6ff;
     margin-top: 0;
     margin-bottom: 1.5rem;
     text-align: center;
     font-size: 1.5rem;
-    border-bottom: none; /* Quitamos borde si lo hubiera por h2 */
+    border-bottom: none; 
 }
 
 .form-group {
@@ -672,18 +672,14 @@ header nav a:hover {
     border-radius: 6px;
     display: inline-block;
     transition: background 0.3s;
-    
-    /* CORRECCIÓN MÓVIL: Evitar selección de texto */
-    -webkit-user-select: none; /* Safari/Chrome */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE/Edge */
-    user-select: none;         /* Estándar */
-    
-    /* Eliminar el cuadro azul de tap en Android */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
 .email-copy:hover { background: rgba(88, 166, 255, 0.2); }
-.email-copy:active { transform: scale(0.98); } /* Feedback visual al tocar */
+.email-copy:active { transform: scale(0.98); }
 
 /* =========================================
     8. FOOTER & UTILIDADES
@@ -730,7 +726,7 @@ footer {
 @keyframes blinkCursor { from, to { opacity: 1; } 50% { opacity: 0; } }
 
 /* =========================================
-    9. MEJORAS DE UX (SCROLLSPY & TOASTS)
+    9. UX (SCROLLSPY & TOASTS)
    ========================================= */
 header nav a.active-link {
     color: #58a6ff;
@@ -812,7 +808,7 @@ header nav a.active-link::after {
         height: 350px; 
     }
 
-    /* Ajuste de formulario y contacto en móvil */
+    /* Ajuste de formulario y contacto */
     .contact-wrapper {
         flex-direction: column;
         gap: 2rem;
