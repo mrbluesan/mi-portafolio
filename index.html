@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- ===== CORRECCIÓN BARRA ANDROID ===== -->
-    <!-- Esto pinta la barra de navegación del navegador del color de tu fondo -->
     <meta name="theme-color" content="#0d1117">
     
     <!-- ===== SEO ===== -->
@@ -21,8 +20,10 @@
     <meta property="og:url" content="https://mrbluesan.github.io/mi-portafolio/">
     <meta property="og:type" content="website">
 
+    <!-- Favicon -->
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" type="image/x-icon">
 
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         xintegrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
@@ -32,8 +33,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
+            // INICIALIZACIÓN DE EMAILJS
+            // RECUERDA: Reemplaza "TU_PUBLIC_KEY" con tu clave pública real de EmailJS
             emailjs.init({
-              publicKey: "TU_PUBLIC_KEY", // RECUERDA PONER TU CLAVE AQUÍ
+              publicKey: "TU_PUBLIC_KEY",
             });
         })();
     </script>
@@ -208,7 +211,6 @@
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <p>¿Tienes un proyecto en mente o quieres hablar de seguridad? ¡Escríbeme!</p>
-                    <!-- EL ELEMENTO DEL CORREO -->
                     <p class="email-copy" id="emailCopy">
                         <i class="fas fa-envelope"></i> <strong>henryalexanderleyton@gmail.com</strong>
                     </p>
