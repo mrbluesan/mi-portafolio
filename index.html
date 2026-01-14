@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- ===== CORRECCIÓN BARRA ANDROID ===== -->
+    <!-- Esto pinta la barra de navegación del navegador del color de tu fondo -->
+    <meta name="theme-color" content="#0d1117">
+    
     <!-- ===== SEO ===== -->
     <title>Portafolio - Henry Leyton | Desarrollador & Pentester</title>
     <meta name="description" content="Portafolio de Henry Leyton. Desarrollador de Software y especialista en Ciberseguridad.">
@@ -28,10 +32,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // INICIALIZACIÓN DE EMAILJS
-            // Reemplaza "TU_PUBLIC_KEY" con la clave pública real de tu cuenta EmailJS
             emailjs.init({
-              publicKey: "TU_PUBLIC_KEY",
+              publicKey: "TU_PUBLIC_KEY", // RECUERDA PONER TU CLAVE AQUÍ
             });
         })();
     </script>
@@ -206,6 +208,7 @@
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <p>¿Tienes un proyecto en mente o quieres hablar de seguridad? ¡Escríbeme!</p>
+                    <!-- EL ELEMENTO DEL CORREO -->
                     <p class="email-copy" id="emailCopy">
                         <i class="fas fa-envelope"></i> <strong>henryalexanderleyton@gmail.com</strong>
                     </p>
@@ -219,11 +222,9 @@
                     </a>
                 </div>
 
-                <!-- Formulario preparado para EmailJS -->
+                <!-- Formulario -->
                 <form id="contactForm" class="contact-form">
-                    <!-- TÍTULO AGREGADO PARA CLARIDAD EN MÓVIL -->
                     <h3 class="form-title">Formulario de Contacto</h3>
-
                     <div class="form-group">
                         <input type="text" id="name" name="name" required placeholder=" ">
                         <label for="name">Nombre</label>
