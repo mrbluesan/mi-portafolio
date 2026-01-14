@@ -446,46 +446,128 @@ if(emailElement) {
     });
 }
 
-// 7. MANEJO DEL FORMULARIO CON EMAILJS
-const contactForm = document.getElementById('contactForm');
+// ==========================================
+// 7. FONDO DE PARTÍCULAS (RED MEJORADA PARA MÓVIL)
+// ==========================================
+const canvas = document.getElementById("particles-canvas");
+const ctx = canvas.getContext("2d");
+let particlesArray;
 
-if (contactForm) {
-    contactForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        console.log("Enviando formulario con EmailJS...");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-        const btnSubmit = document.querySelector('.btn-submit');
-        const originalText = btnSubmit.innerHTML;
+let mouse = { x: null, y: null };
 
-        // Estado de carga
-        btnSubmit.disabled = true;
-        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
+window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
 
-        // REEMPLAZA ESTOS VALORES CON LOS DE TU CUENTA DE EMAILJS
-        const serviceID = 'TU_SERVICE_ID'; // EJEMPLO: 'service_z3x9...'
-        const templateID = 'TU_TEMPLATE_ID'; // EJEMPLO: 'template_k4j...'
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5; 
+        this.speedX = (Math.random() * 0.2) - 0.1;
+        this.speedY = (Math.random() * 0.2) - 0.1;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+        if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
 
-        emailjs.sendForm(serviceID, templateID, this)
-            .then(() => {
-                showToast('¡Mensaje enviado con éxito!');
-                contactForm.reset();
-                btnSubmit.innerHTML = 'Enviado <i class="fas fa-check"></i>';
-                btnSubmit.style.background = '#238636';
-            }, (err) => {
-                console.error("Error de EmailJS:", err);
-                showToast('Hubo un problema al enviar.');
-                btnSubmit.innerHTML = 'Error';
-                btnSubmit.style.background = '#ff5f56';
-            })
-            .finally(() => {
-                 setTimeout(() => {
-                    btnSubmit.disabled = false;
-                    btnSubmit.innerHTML = originalText;
-                    btnSubmit.style.background = '#238636';
-                }, 3000);
-            });
-    });
+        if (mouse.x != undefined) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 200) { 
+                const forceDirectionX = dx / distance;
+                const forceDirectionY = dy / distance;
+                const force = (200 - distance) / 200;
+                const directionX = forceDirectionX * force * 0.5; 
+                const directionY = forceDirectionY * force * 0.5;
+                this.x += directionX;
+                this.y += directionY;
+            }
+        }
+    }
+    draw() {
+        ctx.fillStyle = '#58a6ff';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
 }
+
+function initParticles() {
+    particlesArray = [];
+    // Ajuste de densidad según pantalla
+    let divider = (canvas.width < 768) ? 15000 : 25000; 
+    let numberOfParticles = (canvas.height * canvas.width) / divider;
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+function connect() {
+    let opacityValue = 1;
+    
+    // AJUSTE CRÍTICO PARA MÓVIL
+    // Si es móvil, usamos una distancia fija más grande (8000). 
+    // Si es escritorio, usamos la fórmula proporcional.
+    let connectionDistance = (canvas.width < 768) 
+        ? 9000 
+        : (canvas.width / 9) * (canvas.height / 9);
+
+    for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                           ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+            
+            if (distance < connectionDistance) {
+                opacityValue = 1 - (distance / 20000);
+                ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue + ')';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                ctx.stroke();
+            }
+        }
+        
+        // Conexión Mouse
+        if (mouse.x != undefined) {
+            let dx = particlesArray[a].x - mouse.x;
+            let dy = particlesArray[a].y - mouse.y;
+            let mouseDistance = (dx*dx) + (dy*dy);
+            if (mouseDistance < 25000) { 
+                let mouseOpacity = 1 - (mouseDistance / 25000);
+                ctx.strokeStyle = 'rgba(88, 166, 255,' + mouseOpacity + ')';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    requestAnimationFrame(animateParticles);
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+    }
+    connect();
+}
+
+window.addEventListener('resize', () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    mouse.radius = (canvas.height / 80) * (canvas.width / 80);
+    initParticles();
+});
 
 // Iniciar aplicación
 window.onload = function() { 
