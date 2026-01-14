@@ -672,8 +672,18 @@ header nav a:hover {
     border-radius: 6px;
     display: inline-block;
     transition: background 0.3s;
+    
+    /* CORRECCIÓN MÓVIL: Evitar selección de texto */
+    -webkit-user-select: none; /* Safari/Chrome */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Estándar */
+    
+    /* Eliminar el cuadro azul de tap en Android */
+    -webkit-tap-highlight-color: transparent;
 }
 .email-copy:hover { background: rgba(88, 166, 255, 0.2); }
+.email-copy:active { transform: scale(0.98); } /* Feedback visual al tocar */
 
 /* =========================================
     8. FOOTER & UTILIDADES
