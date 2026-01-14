@@ -152,8 +152,6 @@ function initializeProjectInteractions() {
 
     projectCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // CAMBIO: Ahora permitimos click en .slider-item (imágenes)
-            // Solo bloqueamos click si es en botones o enlaces específicos
             if (e.target.closest('.no-modal') || e.target.closest('.slider-btn')) return;
             
             const mTitle = document.getElementById("modalTitle");
@@ -196,12 +194,23 @@ document.querySelectorAll('.tech-card').forEach(card => {
 });
 
 // ==========================================
-// 4. TERMINAL 3D AVANZADA
+// 4. TERMINAL 3D AVANZADA (FULL)
 // ==========================================
 const terminalCard = document.getElementById('terminalCard');
 const bashInput = document.getElementById('bashInput');
 const bashBody = document.getElementById('bashBody');
 const closeTerminal = document.getElementById('closeTerminal');
+
+let commandHistory = [];
+let historyIndex = -1;
+
+// Filesystem simulado para el comando 'cat'
+const virtualFileSystem = {
+    'skills.txt': 'Python, Django, SQL, Linux, Git, Pentesting, HTML5, CSS3',
+    'about.md': 'Estudiante de Ingeniería en Informática. Apasionado por la ciberseguridad.',
+    'contact.info': 'Email: henryalexanderleyton@gmail.com\nGitHub: github.com/mrbluesan',
+    'root.log': 'Error: Permission denied.'
+};
 
 function printTerminal(html) {
     const line = document.createElement('div');
@@ -226,25 +235,68 @@ if (terminalCard && bashInput && bashBody) {
     });
 
     bashInput.addEventListener('keydown', async function(e) {
-        if (e.key === 'Enter') {
-            const command = this.value.trim().toLowerCase();
-            const originalCmd = this.value; 
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (commandHistory.length > 0) {
+                if (historyIndex === -1) historyIndex = commandHistory.length;
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    this.value = commandHistory[historyIndex];
+                }
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex !== -1) {
+                if (historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    this.value = commandHistory[historyIndex];
+                } else {
+                    historyIndex = -1;
+                    this.value = '';
+                }
+            }
+        } else if (e.key === 'Enter') {
+            const fullCommand = this.value.trim();
+            const parts = fullCommand.split(/\s+/);
+            const command = parts[0].toLowerCase();
+            const arg = parts[1];
+            
+            if (fullCommand) {
+                commandHistory.push(fullCommand);
+                historyIndex = -1;
+            }
+
             const historyLine = document.createElement('div');
-            historyLine.innerHTML = `<span class="prompt">root@kali:~$</span> ${originalCmd}`;
+            historyLine.innerHTML = `<span class="prompt">root@kali:~$</span> ${fullCommand}`;
             bashBody.insertBefore(historyLine, this.parentElement);
             this.value = '';
 
             switch(command) {
-                case 'help': printTerminal("Comandos: <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); break;
+                case 'help': 
+                    printTerminal("Comandos: <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>cat [archivo]</span>, <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>date</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); 
+                    break;
                 case 'whoami': printTerminal("Henry Leyton - CyberSec & Dev"); break;
-                case 'ls': printTerminal("Skills/<br>Python&nbsp;&nbsp;C#&nbsp;&nbsp;SQL&nbsp;&nbsp;Linux&nbsp;&nbsp;Git&nbsp;&nbsp;Pentesting"); break;
-                case 'ifconfig': printTerminal(`eth0: flags=4163&lt;UP&gt; mtu 1500<br>inet 192.168.1.15<br><br>tun0: flags=4305&lt;UP&gt; mtu 1500<br>inet 10.10.14.23 <span style="color: #98c379"># VPN</span>`); break;
+                case 'ls': 
+                    const files = Object.keys(virtualFileSystem).map(f => `<span style="color: #98c379">${f}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;');
+                    printTerminal(files); 
+                    break;
+                case 'pwd': printTerminal("/home/henry/portfolio"); break;
+                case 'ifconfig':
+                    printTerminal(`eth0: flags=4163&lt;UP&gt; mtu 1500<br>inet 192.168.1.15<br><br>tun0: flags=4305&lt;UP&gt; mtu 1500<br>inet 10.10.14.23 <span style="color: #98c379"># VPN</span>`);
+                    break;
                 case 'scan':
                     printTerminal("Starting Nmap 7.94...");
                     setTimeout(() => {
                         printTerminal("PORT STATE SERVICE<br>21/tcp <span style='color:#00ff41'>open</span> ftp<br>22/tcp <span style='color:#00ff41'>open</span> ssh<br>80/tcp <span style='color:#00ff41'>open</span> http");
                     }, 600);
                     break;
+                case 'cat':
+                    if (!arg) printTerminal("Uso: cat [nombre_archivo]");
+                    else if (virtualFileSystem[arg]) printTerminal(virtualFileSystem[arg].replace(/\n/g, '<br>'));
+                    else printTerminal(`cat: ${arg}: No existe el archivo`);
+                    break;
+                case 'date': printTerminal(new Date().toString()); break;
+                case 'sudo': printTerminal(`<span style="color: #ff5f56">user is not in the sudoers file. This incident will be reported.</span>`); break;
                 case 'matrix':
                     {
                         bashInput.disabled = true;
@@ -291,7 +343,7 @@ if (terminalCard && bashInput && bashBody) {
 }
 
 // ==========================================
-// 5. FONDO DE PARTÍCULAS
+// 5. FONDO DE PARTÍCULAS (MÓVIL AJUSTADO)
 // ==========================================
 const canvas = document.getElementById("particles-canvas");
 if (canvas) {
@@ -344,7 +396,9 @@ if (canvas) {
 
     function initParticles() {
         particlesArray = [];
-        let numberOfParticles = (canvas.height * canvas.width) / 25000;
+        // MÓVIL: Menos partículas
+        let divider = (canvas.width < 768) ? 15000 : 25000; 
+        let numberOfParticles = (canvas.height * canvas.width) / divider;
         for (let i = 0; i < numberOfParticles; i++) {
             particlesArray.push(new Particle());
         }
@@ -352,12 +406,18 @@ if (canvas) {
 
     function connect() {
         let opacityValue = 1;
+        
+        // MÓVIL: Mayor distancia de conexión
+        let connectionDistance = (canvas.width < 768) 
+            ? 9000 
+            : (canvas.width / 9) * (canvas.height / 9);
+
         for (let a = 0; a < particlesArray.length; a++) {
             for (let b = a; b < particlesArray.length; b++) {
                 let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
                                ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                 
-                if (distance < (canvas.width / 9) * (canvas.height / 9)) {
+                if (distance < connectionDistance) {
                     opacityValue = 1 - (distance / 20000);
                     ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue + ')';
                     ctx.lineWidth = 1;
@@ -446,128 +506,46 @@ if(emailElement) {
     });
 }
 
-// ==========================================
-// 7. FONDO DE PARTÍCULAS (RED MEJORADA PARA MÓVIL)
-// ==========================================
-const canvas = document.getElementById("particles-canvas");
-const ctx = canvas.getContext("2d");
-let particlesArray;
+// 7. MANEJO DEL FORMULARIO CON EMAILJS
+const contactForm = document.getElementById('contactForm');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+if (contactForm) {
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        console.log("🚀 Enviando formulario con EmailJS...");
 
-let mouse = { x: null, y: null };
+        const btnSubmit = document.querySelector('.btn-submit');
+        const originalText = btnSubmit.innerHTML;
 
-window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
-window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
+        // Estado de carga
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5 + 0.5; 
-        this.speedX = (Math.random() * 0.2) - 0.1;
-        this.speedY = (Math.random() * 0.2) - 0.1;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-        if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+        // REEMPLAZA ESTOS VALORES CON LOS DE TU CUENTA DE EMAILJS
+        const serviceID = 'TU_SERVICE_ID'; // EJEMPLO: 'service_z3x9...'
+        const templateID = 'TU_TEMPLATE_ID'; // EJEMPLO: 'template_k4j...'
 
-        if (mouse.x != undefined) {
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 200) { 
-                const forceDirectionX = dx / distance;
-                const forceDirectionY = dy / distance;
-                const force = (200 - distance) / 200;
-                const directionX = forceDirectionX * force * 0.5; 
-                const directionY = forceDirectionY * force * 0.5;
-                this.x += directionX;
-                this.y += directionY;
-            }
-        }
-    }
-    draw() {
-        ctx.fillStyle = '#58a6ff';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
+        emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+                showToast('¡Mensaje enviado con éxito!');
+                contactForm.reset();
+                btnSubmit.innerHTML = 'Enviado <i class="fas fa-check"></i>';
+                btnSubmit.style.background = '#238636';
+            }, (err) => {
+                console.error("Error de EmailJS:", err);
+                showToast('Hubo un problema al enviar.');
+                btnSubmit.innerHTML = 'Error';
+                btnSubmit.style.background = '#ff5f56';
+            })
+            .finally(() => {
+                 setTimeout(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = originalText;
+                    btnSubmit.style.background = '#238636';
+                }, 3000);
+            });
+    });
 }
-
-function initParticles() {
-    particlesArray = [];
-    // Ajuste de densidad según pantalla
-    let divider = (canvas.width < 768) ? 15000 : 25000; 
-    let numberOfParticles = (canvas.height * canvas.width) / divider;
-    for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-    }
-}
-
-function connect() {
-    let opacityValue = 1;
-    
-    // AJUSTE CRÍTICO PARA MÓVIL
-    // Si es móvil, usamos una distancia fija más grande (8000). 
-    // Si es escritorio, usamos la fórmula proporcional.
-    let connectionDistance = (canvas.width < 768) 
-        ? 9000 
-        : (canvas.width / 9) * (canvas.height / 9);
-
-    for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                           ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-            
-            if (distance < connectionDistance) {
-                opacityValue = 1 - (distance / 20000);
-                ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue + ')';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                ctx.stroke();
-            }
-        }
-        
-        // Conexión Mouse
-        if (mouse.x != undefined) {
-            let dx = particlesArray[a].x - mouse.x;
-            let dy = particlesArray[a].y - mouse.y;
-            let mouseDistance = (dx*dx) + (dy*dy);
-            if (mouseDistance < 25000) { 
-                let mouseOpacity = 1 - (mouseDistance / 25000);
-                ctx.strokeStyle = 'rgba(88, 166, 255,' + mouseOpacity + ')';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                ctx.lineTo(mouse.x, mouse.y);
-                ctx.stroke();
-            }
-        }
-    }
-}
-
-function animateParticles() {
-    requestAnimationFrame(animateParticles);
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-    }
-    connect();
-}
-
-window.addEventListener('resize', () => {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-    mouse.radius = (canvas.height / 80) * (canvas.width / 80);
-    initParticles();
-});
 
 // Iniciar aplicación
 window.onload = function() { 
