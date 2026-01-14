@@ -417,8 +417,12 @@ if (canvas) {
                 let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
                                ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                 
-                if (distance < connectionDistance) {
+                let maxDistance = (canvas.width < 768) ? 9000 : (canvas.width / 9) * (canvas.height / 9);
+
+                if (distance < maxDistance) {
+                // Ajustamos la opacidad para que no sea tan brusca en móvil
                     opacityValue = 1 - (distance / 20000);
+                
                     ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue + ')';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
