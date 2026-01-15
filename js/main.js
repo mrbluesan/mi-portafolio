@@ -420,7 +420,7 @@ if (canvas) {
                 let maxDistance = (canvas.width < 768) ? 9000 : (canvas.width / 9) * (canvas.height / 9);
 
                 if (distance < maxDistance) {
-                // Ajustamos la opacidad para que no sea tan brusca en móvil
+                // Ajustar la opacidad para que no sea tan brusca en móvil
                     opacityValue = 1 - (distance / 20000);
                 
                     ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue + ')';
@@ -516,7 +516,7 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener("submit", function(event) {
         event.preventDefault();
-        console.log("🚀 Enviando formulario con EmailJS...");
+        console.log("Enviando formulario con EmailJS...");
 
         const btnSubmit = document.querySelector('.btn-submit');
         const originalText = btnSubmit.innerHTML;
@@ -525,9 +525,9 @@ if (contactForm) {
         btnSubmit.disabled = true;
         btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
-        // REEMPLAZA ESTOS VALORES CON LOS DE TU CUENTA DE EMAILJS
-        const serviceID = 'TU_SERVICE_ID'; // EJEMPLO: 'service_z3x9...'
-        const templateID = 'TU_TEMPLATE_ID'; // EJEMPLO: 'template_k4j...'
+        // DATOS CUENTA DE EMAILJS
+        const serviceID = 'service_uzp73up'; 
+        const templateID = 'template_t2ogwhy'; 
 
         emailjs.sendForm(serviceID, templateID, this)
             .then(() => {
