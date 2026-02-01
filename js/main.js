@@ -51,9 +51,9 @@ const myProjects = [
         ]
     },
     {
-        title: "Automatización en Linux",
-        desc: "Script avanzado en Python y Bash diseñado para optimizar la organización de archivos. Clasifica descargas, limpia logs antiguos y realiza backups programados.",
-        tech: "Python, Bash, Linux, Cron",
+        title: "Automatización en Linux Framework fases iniciales",
+        desc: "Script avanzado en Bash diseñado para optimizar la organización de archivos, directorios y automatización de fases iniciales de escaneo y reconocimiento del entorno.",
+        tech: "Bash, Linux",
         repo: "https://github.com/mrbluesan/proyecto2",
         images: [
             "https://placehold.co/600x350/21262d/FCC624?text=Linux:+Terminal",
@@ -61,13 +61,19 @@ const myProjects = [
         ]
     },
     {
-        title: "Laboratorio de Pentesting",
+        title: "Laboratorio de Pentesting Máquina SimpleCTF",
         desc: "Informe técnico de un ejercicio de pentesting en la maquina SimpleCTF en plataforma TryHackMe. Explotación de vulnerabilidad en protocolo FTP y postexplotación por ssh con Hydra.",
-        tech: "Metasploit, Nmap, Hydra",
+        tech: "Nmap, Hydra, Vim",
         repo: "https://github.com/mrbluesan/Ciberseguridad-Writeups/blob/main/TryHackMe/SimpleCTF.md",
         images: [
-            "https://placehold.co/600x350/21262d/00ff41?text=Pentest:+Escaneo",
-            "https://placehold.co/600x350/000000/00ff41?text=Pentest:+Reporte"
+            "assets/img/ping.png",
+            "assets/img/nmap_inicial.png",
+            "assets/img/ftp.png",
+            "assets/img/ForMitch.png",
+            "assets/img/hydra.png",
+            "assets/img/flag1.png",
+            "assets/img/sp_vim.png",
+            "assets/img/final.png"
         ]
     }
 ];
