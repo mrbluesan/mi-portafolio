@@ -42,12 +42,10 @@ const myProjects = [
         tech: "Python, Django, MySQL, Bootstrap",
         repo: "https://github.com/mrbluesan/proyecto1",
         images: [
-            "assets/img/img0-project1.png",
-            "assets/img/img1-project1.png",
-            "assets/img/img2-project1.png",
-            "assets/img/img3-project1.png",
-            "assets/img/img4-project1.png",
-            "assets/img/img5-project1.png"
+            "assets/img/checkmate_login.png",
+            "assets/img/checkmate_dashboard.png",
+            "assets/img/checkmate_prestaciones.png",
+            "assets/img/checkmate_edit.png"
         ]
     },
     {
