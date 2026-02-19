@@ -1,6 +1,6 @@
 // ==========================================
 // 1. CONFIGURACIÓN INICIAL & EFECTOS BASES
-// ==========================================
+// ========================================== 
 
 const faders = document.querySelectorAll('.fade-in');
 if (faders.length > 0) {
@@ -17,7 +17,7 @@ if (faders.length > 0) {
 
 const typewriterElement = document.getElementById("typewriter");
 if (typewriterElement) {
-    const text = "HENRY ALEXANDER LEYTON GONZÁLEZ";
+    const text = "HENRY LEYTON GONZÁLEZ";
     const speed = 30; 
     let i = 0;
     function typeWriter() {
@@ -32,9 +32,9 @@ if (typewriterElement) {
     setTimeout(typeWriter, 1000); 
 }
 
-// ==========================================
+// ========================================== 
 // 2. DATOS DE PROYECTOS (JSON)
-// ==========================================
+// ========================================== 
 const myProjects = [
     {
         title: "Sistema CRUD para ONG",
@@ -76,9 +76,9 @@ const myProjects = [
     }
 ];
 
-// ==========================================
+// ========================================== 
 // 3. RENDERIZADO Y EVENTOS
-// ==========================================
+// ========================================== 
 
 let currentModalImages = [];
 let currentImageIndex = 0;
@@ -197,9 +197,9 @@ document.querySelectorAll('.tech-card').forEach(card => {
     card.addEventListener('click', () => card.classList.toggle('active'));
 });
 
-// ==========================================
+// ========================================== 
 // 4. TERMINAL 3D AVANZADA (FULL)
-// ==========================================
+// ========================================== 
 const terminalCard = document.getElementById('terminalCard');
 const bashInput = document.getElementById('bashInput');
 const bashBody = document.getElementById('bashBody');
@@ -271,15 +271,49 @@ if (terminalCard && bashInput && bashBody) {
             }
 
             const historyLine = document.createElement('div');
-            historyLine.innerHTML = `<span class="prompt">root@kali:~$</span> ${fullCommand}`;
+            historyLine.innerHTML = `<span class="prompt">root@kali:~$\\</span> ${fullCommand}`;
             bashBody.insertBefore(historyLine, this.parentElement);
             this.value = '';
 
             switch(command) {
                 case 'help': 
-                    printTerminal("Comandos: <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>cat [archivo]</span>, <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>date</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); 
+                    printTerminal("Comandos: <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>cat [archivo]</span>, <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>thm</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>date</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); 
                     break;
                 case 'whoami': printTerminal("Henry Leyton - CyberSec & Dev"); break;
+                
+                // === NUEVO COMANDO THM ===
+                case 'thm':
+                case 'tryhackme':
+                    printTerminal("Conectando a TryHackMe Database...");
+                    try {
+                        const username = 'mrbluesan';
+                        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://tryhackme.com/api/v2/public-profile?username=' + username)}`;
+                        
+                        const response = await fetch(proxyUrl);
+                        if (!response.ok) throw new Error(`Error en proxy: ${response.status}`);
+                        
+                        const proxyData = await response.json();
+                        if (!proxyData.contents) throw new Error("Proxy no devolvió 'contents'");
+
+                        const data = JSON.parse(proxyData.contents);
+                        if (data.status === 'error') throw new Error('Usuario THM no encontrado');
+
+                        const stats = data.data;
+                        printTerminal(`
+                            <span style="color: #EA2027; font-weight: bold;">===== TRYHACKME STATS =====</span><br>
+                            User: <span class="cmd-highlight">${stats.username}</span><br>
+                            Rank: ${stats.rank}<br>
+                            Rooms Completed: <span style="color: #00ff41">${stats.completedRoomsNumber}</span><br>
+                            Points: ${stats.totalPoints}<br>
+                            <br>
+                            <span style="color: #8b949e;">* Para ver detalle de salas, visita el perfil web https://tryhackme.com/p/mrbluesan.</span>
+                        `);
+                    } catch (e) {
+                        printTerminal(`<span style="color:#ff5f56">Error: No se pudo obtener datos de THM.</span>`);
+                        console.error("Error en comando THM:", e);
+                    }
+                    break;
+
                 case 'ls': 
                     const files = Object.keys(virtualFileSystem).map(f => `<span style="color: #98c379">${f}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;');
                     printTerminal(files); 
@@ -346,9 +380,9 @@ if (terminalCard && bashInput && bashBody) {
     });
 }
 
-// ==========================================
+// ========================================== 
 // 5. FONDO DE PARTÍCULAS (MÓVIL AJUSTADO)
-// ==========================================
+// ========================================== 
 const canvas = document.getElementById("particles-canvas");
 if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -555,8 +589,73 @@ if (contactForm) {
     });
 }
 
+// ========================================== 
+// NUEVO: CARGAR DATOS THM EN LA TARJETA VISUAL
+// ========================================== 
+async function loadTHMStats() {
+    console.log("Iniciando loadTHMStats...");
+    const username = 'mrbluesan';
+    const elUser = document.getElementById('thm-username');
+    const elRank = document.getElementById('thm-rank');
+    const elRooms = document.getElementById('thm-rooms');
+    const elPoints = document.getElementById('thm-points');
+    const elBadges = document.getElementById('thm-badges');
+    const elAvatar = document.getElementById('thm-avatar');
+
+    if (!elUser) {
+        console.error("No se encontraron los elementos del DOM para la tarjeta THM.");
+        return;
+    }
+
+    try {
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://tryhackme.com/api/v2/public-profile?username=' + username)}`;
+        console.log("Buscando datos desde:", proxyUrl);
+
+        const response = await fetch(proxyUrl);
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta del proxy: ${response.status} ${response.statusText}`);
+        }
+        const proxyData = await response.json();
+        console.log("Respuesta del proxy (proxyData):", proxyData);
+
+        if (!proxyData.contents) {
+            throw new Error("La respuesta del proxy no contiene el campo 'contents'.");
+        }
+        const data = JSON.parse(proxyData.contents);
+        console.log("Datos de THM parseados (data):", data);
+
+        if (data.status === 'success') {
+            const stats = data.data;
+            console.log("Objeto de estadísticas (stats):", stats);
+
+            // Actualizar DOM
+            elUser.textContent = stats.username || "N/A";
+            elRank.textContent = `Rango: ${stats.rank || "N/A"}`;
+            elRooms.textContent = stats.completedRoomsNumber || 0;
+            elPoints.textContent = stats.totalPoints || 0;
+            elBadges.textContent = stats.badgesNumber || 0;
+            
+            if (stats.avatar) {
+                console.log("Avatar URL encontrada:", stats.avatar);
+                elAvatar.src = stats.avatar;
+            } else {
+                console.log("No se encontró URL de avatar en los datos.");
+            }
+            console.log("DOM actualizado con las estadísticas de THM.");
+        } else {
+            throw new Error(`La API de THM devolvió un estado de error: ${data.status}`);
+        }
+    } catch (error) {
+        console.error("Error detallado al cargar estadísticas de THM:", error);
+        if (elUser) elUser.textContent = "Error de carga";
+        if (elRank) elRank.textContent = "Verifique la consola del navegador";
+    }
+}
+
 // Iniciar aplicación
 window.onload = function() { 
     renderProjects();
     initScrollSpy();
+    // Cargar stats de THM
+    loadTHMStats();
 };
