@@ -2,16 +2,24 @@
 // 1. CONFIGURACIÓN INICIAL & EFECTOS BASES
 // ========================================== 
 
+const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach((entry, index) => {
+        if (!entry.isIntersecting) return;
+        // Delay secuencial basado en el orden relativo de los elementos (stagger) para las tarjetas
+        if (entry.target.classList.contains('tech-card') || entry.target.classList.contains('card')) {
+            setTimeout(() => {
+                entry.target.classList.add("show");
+            }, index * 100); // 100ms offset per item
+        } else {
+            entry.target.classList.add("show");
+        }
+        observer.unobserve(entry.target);
+    });
+}, appearOptions);
+
 const faders = document.querySelectorAll('.fade-in');
 if (faders.length > 0) {
-    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("show");
-            observer.unobserve(entry.target);
-        });
-    }, appearOptions);
     faders.forEach(fader => { appearOnScroll.observe(fader); });
 }
 
@@ -37,9 +45,9 @@ if (typewriterElement) {
 // ========================================== 
 const myProjects = [
     {
-        title: "Sistema CRUD para ONG",
-        desc: "Aplicación web completa desarrollada con Python (Django) y MySQL. Este sistema permite registrar usuarios, gestionar roles, listar beneficiarios y visualizar estadísticas generales. Incluye autenticación segura.",
-        tech: "Python, Django, MySQL, Bootstrap",
+        title: "Sistema con análisis de datos CheckMate Admin",
+        desc: "Plataforma administrativa (Django/MySQL) orientada a la gestión de ONG. Implementa un pipeline de datos con Pandas para el registro masivo y normalización de ingresos de beneficiarios vía CSV/Excel. La arquitectura modular, control de roles y visualización de KPIs se desarrolló analizando los flujos operativos para automatizar la gestión y toma de decisiones.",
+        tech: "Python, Django, Pandas, MySQL, Bootstrap",
         repo: "https://github.com/mrbluesan/proyecto1",
         images: [
             "assets/img/checkmate_login.png",
@@ -49,9 +57,9 @@ const myProjects = [
         ]
     },
     {
-        title: "Automatización en Linux Framework fases iniciales",
-        desc: "Script avanzado en Bash diseñado para optimizar la organización de archivos, directorios y automatización de fases iniciales de escaneo y reconocimiento del entorno.",
-        tech: "Bash, Linux",
+        title: "Framework Automatizado de Reconocimiento Inicial",
+        desc: "Herramienta de scripting en Bash diseñada para estandarizar la fase de Information Gathering en pentesting web y de infraestructura. Automatiza el descubrimiento de conectividad (ping sweeps), escaneo de puertos, y enumeración de servicios/versiones mediante Nmap, además de estructurar automáticamente el entorno de almacenamiento de evidencias.",
+        tech: "Bash, Nmap, Linux, Pentesting",
         repo: "https://github.com/mrbluesan/proyecto2",
         images: [
             "https://placehold.co/600x350/21262d/FCC624?text=Linux:+Terminal",
@@ -85,6 +93,38 @@ let currentImageIndex = 0;
 const modalImg = document.getElementById("modalImg");
 const modal = document.getElementById("projectModal");
 
+window.handleRepoClick = async function(e, repoUrl) {
+    if (e) e.preventDefault();
+
+    if (!repoUrl || repoUrl === "#" || repoUrl.trim() === "") {
+        showToast("Este repositorio aún está en desarrollo o es privado.", "warning");
+        return;
+    }
+
+    try {
+        if (repoUrl.includes("github.com/")) {
+            const urlObj = new URL(repoUrl);
+            const pathParts = urlObj.pathname.split('/').filter(Boolean);
+            if (pathParts.length >= 2) {
+                const username = pathParts[0];
+                const repo = pathParts[1];
+                
+                // Validamos mediante la API de GitHub para verificar si existe y es público
+                const response = await fetch(`https://api.github.com/repos/${username}/${repo}`);
+                if (response.status === 404) {
+                    showToast("El repositorio es privado o aún no existe en GitHub.", "warning");
+                    return; // Detenemos la navegación
+                }
+            }
+        }
+    } catch (error) {
+        console.error("No se pudo verificar el repo, omitiendo validación estricta:", error);
+    }
+
+    // Si es válido o falló la verificación, abrimos la url
+    window.open(repoUrl, "_blank");
+};
+
 function updateModalImage() {
     if (currentModalImages.length > 0 && modalImg) {
         modalImg.style.opacity = '0';
@@ -103,11 +143,11 @@ function renderProjects() {
     myProjects.forEach(project => {
         let imagesHTML = '';
         project.images.forEach(imgSrc => {
-            imagesHTML += `<div class="slider-item"><img src="${imgSrc}" alt="${project.title}"></div>`;
+            imagesHTML += `<div class="slider-item"><img src="${imgSrc}" alt="${project.title}" loading="lazy"></div>`;
         });
 
         const cardHTML = `
-            <div class="card project-card-trigger" 
+            <div class="card project-card-trigger fade-in" 
                  data-title="${project.title}" 
                  data-desc="${project.desc}"
                  data-tech="${project.tech}"
@@ -120,7 +160,7 @@ function renderProjects() {
                 <div class="card-content">
                     <h3>${project.title}</h3>
                     <p>${project.desc.substring(0, 100)}...</p>
-                    <a href="${project.repo}" target="_blank" class="btn-repo no-modal">
+                    <a href="${project.repo || '#'}" target="_blank" class="btn-repo no-modal" onclick="window.handleRepoClick(event, '${project.repo || '#'}')">
                         Ver en GitHub <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -128,6 +168,10 @@ function renderProjects() {
         container.innerHTML += cardHTML;
     });
 
+    // Re-observar nuevas cards generadas dinámicamente
+    const newFaders = container.querySelectorAll('.fade-in');
+    newFaders.forEach(fader => { appearOnScroll.observe(fader); });
+    
     initializeProjectInteractions();
 }
 
@@ -166,7 +210,11 @@ function initializeProjectInteractions() {
             if(mTitle) mTitle.textContent = card.getAttribute('data-title');
             if(mDesc) mDesc.textContent = card.getAttribute('data-desc');
             if(mTech) mTech.textContent = card.getAttribute('data-tech');
-            if(mRepo) mRepo.href = card.getAttribute('data-repo');
+            if(mRepo) {
+                const repoUrl = card.getAttribute('data-repo') || "#";
+                mRepo.href = repoUrl;
+                mRepo.onclick = (event) => window.handleRepoClick(event, repoUrl);
+            }
             
             const imagesInCard = card.querySelectorAll('.slider-item img');
             currentModalImages = Array.from(imagesInCard).map(img => img.src);
@@ -210,10 +258,10 @@ let historyIndex = -1;
 
 // Filesystem simulado para el comando 'cat'
 const virtualFileSystem = {
-    'skills.txt': 'Python, Django, SQL, Linux, Git, Pentesting, HTML5, CSS3',
+    'skills.txt': 'Python, Django, Pandas, SQL, Linux, Git, Nmap, Pentesting',
     'about.md': 'Estudiante de Ingeniería en Informática. Apasionado por la ciberseguridad.',
     'contact.info': 'Email: henryalexanderleyton@gmail.com\nGitHub: github.com/mrbluesan',
-    'root.log': 'Error: Permission denied.'
+    '.secret': 'Felicidades hacker. Toma tu flag: THM{m4st3r_p0rtf0l10}'
 };
 
 function printTerminal(html) {
@@ -277,46 +325,47 @@ if (terminalCard && bashInput && bashBody) {
 
             switch(command) {
                 case 'help': 
-                    printTerminal("Comandos: <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>cat [archivo]</span>, <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>thm</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>date</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); 
+                    printTerminal("Comandos: <span class='cmd-highlight'>ls</span>, <span class='cmd-highlight'>cat [archivo]</span>, <span class='cmd-highlight'>whoami</span>, <span class='cmd-highlight'>scan</span>, <span class='cmd-highlight'>matrix</span>, <span class='cmd-highlight'>ifconfig</span>, <span class='cmd-highlight'>github</span>, <span class='cmd-highlight'>date</span>, <span class='cmd-highlight'>clear</span>, <span class='cmd-highlight'>exit</span>"); 
                     break;
-                case 'whoami': printTerminal("Henry Leyton - CyberSec & Dev"); break;
-                
-                // === NUEVO COMANDO THM ===
-                case 'thm':
-                case 'tryhackme':
-                    printTerminal("Conectando a TryHackMe Database...");
-                    try {
-                        const username = 'mrbluesan';
-                        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://tryhackme.com/api/v2/public-profile?username=' + username)}`;
-                        
-                        const response = await fetch(proxyUrl);
-                        if (!response.ok) throw new Error(`Error en proxy: ${response.status}`);
-                        
-                        const proxyData = await response.json();
-                        if (!proxyData.contents) throw new Error("Proxy no devolvió 'contents'");
-
-                        const data = JSON.parse(proxyData.contents);
-                        if (data.status === 'error') throw new Error('Usuario THM no encontrado');
-
-                        const stats = data.data;
-                        printTerminal(`
-                            <span style="color: #EA2027; font-weight: bold;">===== TRYHACKME STATS =====</span><br>
-                            User: <span class="cmd-highlight">${stats.username}</span><br>
-                            Rank: ${stats.rank}<br>
-                            Rooms Completed: <span style="color: #00ff41">${stats.completedRoomsNumber}</span><br>
-                            Points: ${stats.totalPoints}<br>
-                            <br>
-                            <span style="color: #8b949e;">* Para ver detalle de salas, visita el perfil web https://tryhackme.com/p/mrbluesan.</span>
-                        `);
-                    } catch (e) {
-                        printTerminal(`<span style="color:#ff5f56">Error: No se pudo obtener datos de THM.</span>`);
-                        console.error("Error en comando THM:", e);
+                case 'whoami': 
+                    bashInput.disabled = true;
+                    const whoamiText = "Henry Leyton - CyberSec Specialist & Developer";
+                    let wIndex = 0;
+                    const wInterval = setInterval(() => {
+                        if (wIndex === 0) {
+                            bashBody.innerHTML += `<div class='output whoami-typing'></div>`;
+                        }
+                        const whoamiEl = bashBody.lastElementChild;
+                        whoamiEl.textContent += whoamiText.charAt(wIndex);
+                        wIndex++;
+                        bashBody.scrollTop = bashBody.scrollHeight;
+                        if (wIndex >= whoamiText.length) {
+                            clearInterval(wInterval);
+                            bashInput.disabled = false;
+                            bashInput.focus();
+                        }
+                    }, 50);
+                    break;
+                case 'sudo': 
+                    if (arg === 'rm') {
+                        printTerminal(`<span style="color: #ff5f56">Error: ¿Intentando borrar mi portafolio? Buen intento hacker.</span> <br> <i>This incident will be reported.</i>`);
+                    } else {
+                        printTerminal(`<span style="color: #ff5f56">user is not in the sudoers file. This incident will be reported.</span>`); 
                     }
                     break;
 
                 case 'ls': 
-                    const files = Object.keys(virtualFileSystem).map(f => `<span style="color: #98c379">${f}</span>`).join('&nbsp;&nbsp;&nbsp;&nbsp;');
-                    printTerminal(files); 
+                    let filesHTML = '';
+                    Object.keys(virtualFileSystem).forEach(f => {
+                        if(f.startsWith('.')) {
+                             // Archivos ocultos solo se ven con ls -a
+                             if(arg === '-a' || arg === '-la' || arg === '-al') filesHTML += `<span style="color: #8b949e">${f}</span>&nbsp;&nbsp;&nbsp;&nbsp;`;
+                        } else {
+                             filesHTML += `<span style="color: #98c379">${f}</span>&nbsp;&nbsp;&nbsp;&nbsp;`;
+                        }
+                    });
+                    if(!filesHTML) filesHTML = "Uso de ls permite ver archivos";
+                    printTerminal(filesHTML); 
                     break;
                 case 'pwd': printTerminal("/home/henry/portfolio"); break;
                 case 'ifconfig':
@@ -589,73 +638,9 @@ if (contactForm) {
     });
 }
 
-// ========================================== 
-// NUEVO: CARGAR DATOS THM EN LA TARJETA VISUAL
-// ========================================== 
-async function loadTHMStats() {
-    console.log("Iniciando loadTHMStats...");
-    const username = 'mrbluesan';
-    const elUser = document.getElementById('thm-username');
-    const elRank = document.getElementById('thm-rank');
-    const elRooms = document.getElementById('thm-rooms');
-    const elPoints = document.getElementById('thm-points');
-    const elBadges = document.getElementById('thm-badges');
-    const elAvatar = document.getElementById('thm-avatar');
-
-    if (!elUser) {
-        console.error("No se encontraron los elementos del DOM para la tarjeta THM.");
-        return;
-    }
-
-    try {
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://tryhackme.com/api/v2/public-profile?username=' + username)}`;
-        console.log("Buscando datos desde:", proxyUrl);
-
-        const response = await fetch(proxyUrl);
-        if (!response.ok) {
-            throw new Error(`Error en la respuesta del proxy: ${response.status} ${response.statusText}`);
-        }
-        const proxyData = await response.json();
-        console.log("Respuesta del proxy (proxyData):", proxyData);
-
-        if (!proxyData.contents) {
-            throw new Error("La respuesta del proxy no contiene el campo 'contents'.");
-        }
-        const data = JSON.parse(proxyData.contents);
-        console.log("Datos de THM parseados (data):", data);
-
-        if (data.status === 'success') {
-            const stats = data.data;
-            console.log("Objeto de estadísticas (stats):", stats);
-
-            // Actualizar DOM
-            elUser.textContent = stats.username || "N/A";
-            elRank.textContent = `Rango: ${stats.rank || "N/A"}`;
-            elRooms.textContent = stats.completedRoomsNumber || 0;
-            elPoints.textContent = stats.totalPoints || 0;
-            elBadges.textContent = stats.badgesNumber || 0;
-            
-            if (stats.avatar) {
-                console.log("Avatar URL encontrada:", stats.avatar);
-                elAvatar.src = stats.avatar;
-            } else {
-                console.log("No se encontró URL de avatar en los datos.");
-            }
-            console.log("DOM actualizado con las estadísticas de THM.");
-        } else {
-            throw new Error(`La API de THM devolvió un estado de error: ${data.status}`);
-        }
-    } catch (error) {
-        console.error("Error detallado al cargar estadísticas de THM:", error);
-        if (elUser) elUser.textContent = "Error de carga";
-        if (elRank) elRank.textContent = "Verifique la consola del navegador";
-    }
-}
 
 // Iniciar aplicación
 window.onload = function() { 
     renderProjects();
     initScrollSpy();
-    // Cargar stats de THM
-    loadTHMStats();
 };

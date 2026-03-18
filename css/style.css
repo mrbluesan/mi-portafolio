@@ -13,6 +13,24 @@ html, body {
     position: relative;
 }
 
+/* =========================================
+    SCROLLBAR PERSONALIZADO
+   ========================================= */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0d1117;
+}
+::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #58a6ff;
+}
+
 #particles-canvas {
     position: fixed;
     top: 0;
@@ -43,8 +61,9 @@ h1, h2 {
     2. HEADER & NAV
    ========================================= */
 header {
-    background: rgba(22, 27, 34, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(22, 27, 34, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     padding: 1rem 2rem;
     position: fixed;
     width: 100%;
@@ -229,13 +248,14 @@ header nav a:hover {
 
 .tech-card {
     position: relative;
-    background: rgba(22, 27, 34, 0.6);
-    backdrop-filter: blur(10px);
+    background: rgba(22, 27, 34, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 2rem 1rem;
     text-align: center;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
     cursor: pointer;
     min-height: 160px;
@@ -307,42 +327,44 @@ header nav a:hover {
     pointer-events: all;
 }
 
-/* Colores específicos */
-.tech-python:hover, .tech-python.active { border-color: #3776AB; background: rgba(55, 118, 171, 0.15); }
-.tech-python:hover .icon-box, .tech-python.active .icon-box { color: #3776AB; }
+/* Colores específicos & Efectos Neón */
+.tech-python:hover, .tech-python.active { border-color: #3776AB; background: rgba(55, 118, 171, 0.15); box-shadow: 0 0 20px rgba(55, 118, 171, 0.3); }
+.tech-python:hover .icon-box, .tech-python.active .icon-box { color: #3776AB; text-shadow: 0 0 10px rgba(55, 118, 171, 0.8); }
 
-.tech-csharp:hover, .tech-csharp.active { border-color: #9b4993; background: rgba(155, 73, 147, 0.15); }
-.tech-csharp:hover .icon-box, .tech-csharp.active .icon-box { color: #9b4993; }
+.tech-csharp:hover, .tech-csharp.active { border-color: #9b4993; background: rgba(155, 73, 147, 0.15); box-shadow: 0 0 20px rgba(155, 73, 147, 0.3); }
+.tech-csharp:hover .icon-box, .tech-csharp.active .icon-box { color: #9b4993; text-shadow: 0 0 10px rgba(155, 73, 147, 0.8); }
 
-.tech-sql:hover, .tech-sql.active { border-color: #00bcff; background: rgba(0, 188, 255, 0.15); }
-.tech-sql:hover .icon-box, .tech-sql.active .icon-box { color: #00bcff; }
+.tech-sql:hover, .tech-sql.active { border-color: #00bcff; background: rgba(0, 188, 255, 0.15); box-shadow: 0 0 20px rgba(0, 188, 255, 0.3); }
+.tech-sql:hover .icon-box, .tech-sql.active .icon-box { color: #00bcff; text-shadow: 0 0 10px rgba(0, 188, 255, 0.8); }
 
-.tech-linux:hover, .tech-linux.active { border-color: #FCC624; background: rgba(252, 198, 36, 0.15); }
-.tech-linux:hover .icon-box, .tech-linux.active .icon-box { color: #FCC624; }
+.tech-linux:hover, .tech-linux.active { border-color: #FCC624; background: rgba(252, 198, 36, 0.15); box-shadow: 0 0 20px rgba(252, 198, 36, 0.3); }
+.tech-linux:hover .icon-box, .tech-linux.active .icon-box { color: #FCC624; text-shadow: 0 0 10px rgba(252, 198, 36, 0.8); }
 
-.tech-git:hover, .tech-git.active { border-color: #F05032; background: rgba(240, 80, 50, 0.15); }
-.tech-git:hover .icon-box, .tech-git.active .icon-box { color: #F05032; }
+.tech-git:hover, .tech-git.active { border-color: #F05032; background: rgba(240, 80, 50, 0.15); box-shadow: 0 0 20px rgba(240, 80, 50, 0.3); }
+.tech-git:hover .icon-box, .tech-git.active .icon-box { color: #F05032; text-shadow: 0 0 10px rgba(240, 80, 50, 0.8); }
 
-.tech-html:hover, .tech-html.active { border-color: #E34F26; background: rgba(227, 79, 38, 0.15); }
-.tech-html:hover .icon-box, .tech-html.active .icon-box { color: #E34F26; }
+.tech-html:hover, .tech-html.active { border-color: #E34F26; background: rgba(227, 79, 38, 0.15); box-shadow: 0 0 20px rgba(227, 79, 38, 0.3); }
+.tech-html:hover .icon-box, .tech-html.active .icon-box { color: #E34F26; text-shadow: 0 0 10px rgba(227, 79, 38, 0.8); }
 
-.tech-css:hover, .tech-css.active { border-color: #1572B6; background: rgba(21, 114, 182, 0.15); }
-.tech-css:hover .icon-box, .tech-css.active .icon-box { color: #1572B6; }
+.tech-css:hover, .tech-css.active { border-color: #1572B6; background: rgba(21, 114, 182, 0.15); box-shadow: 0 0 20px rgba(21, 114, 182, 0.3); }
+.tech-css:hover .icon-box, .tech-css.active .icon-box { color: #1572B6; text-shadow: 0 0 10px rgba(21, 114, 182, 0.8); }
 
-.tech-security:hover, .tech-security.active { border-color: #00ff41; background: rgba(0, 255, 65, 0.15); }
-.tech-security:hover .icon-box, .tech-security.active .icon-box { color: #00ff41; }
+.tech-security:hover, .tech-security.active { border-color: #00ff41; background: rgba(0, 255, 65, 0.15); box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); }
+.tech-security:hover .icon-box, .tech-security.active .icon-box { color: #00ff41; text-shadow: 0 0 10px rgba(0, 255, 65, 0.8); }
 
 /* =========================================
     5. PROYECTOS & SLIDER
    ========================================= */
 .card {
-    background: #161b22;
+    background: rgba(22, 27, 34, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     padding: 0;
     margin: 2rem 0;
     border-radius: 12px;
-    border: 1px solid #30363d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -350,8 +372,8 @@ header nav a:hover {
 
 .card:hover {
     transform: translateY(-8px);
-    border-color: #58a6ff;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(88, 166, 255, 0.6);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(88, 166, 255, 0.15);
 }
 
 .slider-wrapper { position: relative; }
@@ -708,8 +730,15 @@ footer {
     font-weight: bold;
 }
 
-.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s; }
-.fade-in.show { opacity: 1; transform: translateY(0); }
+.fade-in { 
+    opacity: 0; 
+    transform: translateY(30px); 
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1s cubic-bezier(0.215, 0.61, 0.355, 1); 
+}
+.fade-in.show { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
 
 #typewriter {
     white-space: nowrap;
@@ -774,7 +803,14 @@ header nav a.active-link::after {
     transform: translateX(100%);
     animation: slideInToast 0.3s forwards;
 }
-.toast i { color: #238636; font-size: 1.1rem; }
+.toast.success { border-left-color: #238636; }
+.toast.success i { color: #238636; font-size: 1.1rem; }
+
+.toast.warning { border-left-color: #d29922; }
+.toast.warning i { color: #d29922; font-size: 1.1rem; }
+
+.toast.error { border-left-color: #f85149; }
+.toast.error i { color: #f85149; font-size: 1.1rem; }
 @keyframes slideInToast { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 .toast.hide { animation: fadeOutToast 0.3s forwards; }
 @keyframes fadeOutToast { to { transform: translateX(100%); opacity: 0; } }
