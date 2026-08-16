@@ -1,25 +1,25 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ===== CORRECCIÓN BARRA ANDROID ===== -->
+    <!-- ===== CORRECCIÓN BARRA ANDROID / BROWSER THEME ===== -->
     <meta name="theme-color" content="#0d1117" />
 
     <!-- ===== SEO ===== -->
-    <title>Portafolio - Henry Leyton | Desarrollador & Pentester</title>
+    <title>Henry Leyton | Desarrollador de Software & Pentester</title>
     <meta
       name="description"
-      content="Portafolio de Henry Leyton. Desarrollador de Software y especialista en Ciberseguridad."
+      content="Portafolio profesional de Henry Leyton. Desarrollador de Software enfocado en Python, automatización y especialista en Ciberseguridad / Pentesting."
     />
     <meta name="author" content="Henry Leyton" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Portafolio - Henry Leyton" />
+    <meta property="og:title" content="Portafolio - Henry Leyton | Dev & CyberSec" />
     <meta
       property="og:description"
-      content="Mira mis proyectos de desarrollo y ciberseguridad."
+      content="Descubre mis proyectos de desarrollo de software, análisis de datos y laboratorios de ciberseguridad."
     />
     <meta property="og:image" content="assets/img/preview-portfolio.png" />
     <meta
@@ -35,12 +35,19 @@
       type="image/x-icon"
     />
 
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Estilos -->
     <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      xintegrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -52,7 +59,6 @@
     ></script>
     <script type="text/javascript">
       (function () {
-        // INICIALIZACIÓN DE EMAILJS
         emailjs.init({
           publicKey: "okoyudz-SDZEDqVuF",
         });
@@ -61,103 +67,245 @@
   </head>
 
   <body>
-    <!-- CANVAS PARA EL FONDO DE PARTÍCULAS -->
+    <!-- CANVAS PARA EL FONDO DE PARTÍCULAS REACTIVAS -->
     <canvas id="particles-canvas"></canvas>
 
-    <header>
-      <nav>
-        <h2 id="typewriter"></h2>
-        <div>
-          <a href="#sobre-mi">Sobre mí</a>
-          <a href="#tecnologias">Skills</a>
-          <a href="#proyectos">Proyectos</a>
+    <!-- HEADER & NAVEGACIÓN FIJA CON NOMBRE A LA IZQUIERDA -->
+    <header id="mainHeader">
+      <nav class="nav-container">
+        <a href="#hero" class="brand-logo" aria-label="Inicio">
+          <span class="brand-name">Henry Leyton González</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#hero" class="nav-item">Inicio</a>
+          <a href="#sobre-mi" class="nav-item">Sobre mí</a>
+          <a href="#tecnologias" class="nav-item">Skills</a>
+          <a href="#proyectos" class="nav-item">Proyectos</a>
           <a
             href="https://github.com/mrbluesan/Ciberseguridad-Writeups"
             target="_blank"
-            >Writeups</a
-          >
-          <a href="#contacto">Contacto</a>
+            class="nav-item nav-external"
+            >Writeups <i class="fas fa-arrow-up-right-from-square nav-ext-icon"></i
+          ></a>
+          <a href="#contacto" class="nav-item">Contacto</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="assets/docs/CV_Henry_Leyton.pdf" download class="btn-nav-cv">
+            <span>CV</span> <i class="fas fa-file-download"></i>
+          </a>
+          <button class="mobile-toggle" id="menuToggle" aria-label="Abrir menú de navegación">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
         </div>
       </nav>
     </header>
 
+    <!-- MENÚ MÓVIL OVERLAY / DRAWER -->
+    <div id="mobileMenu" class="mobile-drawer">
+      <div class="mobile-drawer-header">
+        <a href="#hero" class="brand-logo">
+          <span class="brand-name">Henry Leyton</span>
+        </a>
+        <button id="closeMenu" class="btn-close-menu" aria-label="Cerrar menú">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+      <div class="mobile-drawer-links">
+        <a href="#hero" class="mobile-nav-item">Inicio</a>
+        <a href="#sobre-mi" class="mobile-nav-item">Sobre mí</a>
+        <a href="#tecnologias" class="mobile-nav-item">Skills</a>
+        <a href="#proyectos" class="mobile-nav-item">Proyectos</a>
+        <a
+          href="https://github.com/mrbluesan/Ciberseguridad-Writeups"
+          target="_blank"
+          class="mobile-nav-item"
+          >Writeups <i class="fas fa-arrow-up-right-from-square"></i
+        ></a>
+        <a href="#contacto" class="mobile-nav-item">Contacto</a>
+      </div>
+      <div class="mobile-drawer-footer">
+        <a href="assets/docs/CV_Henry_Leyton.pdf" download class="btn-primary btn-block">
+          <i class="fas fa-file-download"></i> Descargar CV
+        </a>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
     <main class="container">
-      <!-- TERMINAL 3D -->
-      <div class="terminal-scene">
-        <div class="terminal-card" id="terminalCard">
-          <div class="terminal-face front">
-            <div class="terminal-header">
-              <div class="terminal-title">main.py</div>
-              <div class="terminal-controls">
-                <div class="control close"></div>
-                <div class="control minimize"></div>
-                <div class="control maximize"></div>
-              </div>
-            </div>
-            <div class="terminal-text">
-              <span class="cmd-keyword">if</span>
-              <span class="cmd-func">puedes_imaginarlo</span>():<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmd-action"
-                >puedes_programarlo</span
-              >() <br /><br />
-              <span class="comment"># Haz clic para abrir consola >_</span>
-            </div>
+      <!-- HERO SECTION -->
+      <section id="hero" class="hero-section fade-in">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-text"><i class="fas fa-terminal"></i> Software Developer & Pentester</span>
           </div>
-          <div class="terminal-face back">
-            <div class="terminal-header bash-header">
-              <div class="terminal-title">root@kali:~</div>
-              <div class="terminal-controls">
-                <div class="control close" id="closeTerminal"></div>
+
+          <h1 class="hero-title">
+            Automatización, Código,  &<br />
+            <span class="gradient-text">Seguridad Ofensiva/Defensiva</span>
+          </h1>
+
+          <p class="hero-description">
+            Estudiante de Ingeniería en Informática especializado en
+            <strong>Python</strong>, arquitecturas con <strong>SQL</strong> y
+            entornos <strong>Linux</strong>. Transformo necesidades operativas en
+            soluciones robustas y evaluadas con mentalidad de ciberseguridad.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#proyectos" class="btn-primary">
+              Ver Proyectos <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#contacto" class="btn-secondary">
+              Contactar <i class="fas fa-paper-plane"></i>
+            </a>
+            <a
+              href="assets/docs/CV_Henry_Leyton.pdf"
+              download
+              class="btn-outline"
+            >
+              <i class="fas fa-file-pdf"></i> CV
+            </a>
+          </div>
+
+          <div class="hero-socials">
+            <a
+              href="https://github.com/mrbluesan"
+              target="_blank"
+              class="social-icon-btn"
+              title="GitHub - mrbluesan"
+              aria-label="GitHub"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+              href="https://tryhackme.com/p/mrbluesan"
+              target="_blank"
+              class="social-icon-btn"
+              title="TryHackMe - mrbluesan"
+              aria-label="TryHackMe"
+            >
+              <i class="fas fa-shield-halved"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/henry-leyton-gonz%C3%A1lez-97270717b/"
+              target="_blank"
+              class="social-icon-btn"
+              title="LinkedIn - Henry Leyton"
+              aria-label="LinkedIn"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- TERMINAL 3D INTERACTIVA INTEGRADA EN EL HERO -->
+        <div class="terminal-scene">
+          <div class="terminal-card" id="terminalCard">
+            <div class="terminal-face front">
+              <div class="terminal-header">
+                <div class="terminal-title"><i class="fab fa-python"></i> main.py</div>
+                <div class="terminal-controls">
+                  <div class="control close"></div>
+                  <div class="control minimize"></div>
+                  <div class="control maximize"></div>
+                </div>
+              </div>
+              <div class="terminal-text">
+                <span class="cmd-keyword">if</span>
+                <span class="cmd-func">puedes_imaginarlo</span>():<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmd-action"
+                  >puedes_programarlo</span
+                >() <br /><br />
+                <div class="terminal-hint">
+                  <i class="fas fa-arrow-pointer"></i> Haz clic para abrir consola interactiva &gt;_
+                </div>
               </div>
             </div>
-            <div class="bash-body" id="bashBody">
-              <div class="output">
-                Henry's Shell v1.0<br />
-                Type <span class="cmd-highlight">'help'</span> for commands.
+            <div class="terminal-face back">
+              <div class="terminal-header bash-header">
+                <div class="terminal-title"><i class="fas fa-terminal"></i> root@kali:~</div>
+                <div class="terminal-controls">
+                  <div class="control close" id="closeTerminal" title="Volver al código"></div>
+                </div>
               </div>
-              <div class="input-line">
-                <span class="prompt">root@kali:~$</span>
-                <input
-                  type="text"
-                  id="bashInput"
-                  autocomplete="off"
-                  autofocus
-                />
+              <div class="bash-body" id="bashBody">
+                <div class="output">
+                  Henry's Shell v1.0 [Kali Linux Theme]<br />
+                  Escribe <span class="cmd-highlight">'help'</span> para ver los comandos disponibles.
+                </div>
+                <div class="input-line">
+                  <span class="prompt">root@kali:~$</span>
+                  <input
+                    type="text"
+                    id="bashInput"
+                    autocomplete="off"
+                    autofocus
+                    aria-label="Entrada de consola"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- SECCIÓN 1: SOBRE MÍ -->
-      <section id="sobre-mi" class="fade-in">
-        <h1>Sobre mi</h1>
-        <p>
-          Soy estudiante de Ingeniería de Ejecución en Informática Mención
-          Desarrollo de Sistemas, apasionado por la automatización y la
-          eficiencia. Mi fuerte es Python, lenguaje con el que he desarrollado
-          herramientas de gestión, scripts operativos y soluciones de escritorio
-          integradas con bases de datos SQL. Mi curiosidad técnica me ha llevado
-          a explorar más allá del código: gestiono entornos Linux, utilizo
-          herramientas de ciberseguridad para fortalecer mis desarrollos y
-          actualmente estoy incursionando en el mundo móvil con Kotlin.
-        </p>
+      <section id="sobre-mi" class="section-block fade-in">
+        <div class="section-header">
+          <span class="section-tag"><i class="fas fa-user"></i> Trayectoria</span>
+          <h2>Sobre mí</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card main-bio">
+            <p>
+              Soy estudiante de <strong>Ingeniería de Ejecución en Informática Mención Desarrollo de Sistemas</strong>, apasionado por la automatización de flujos y la optimización de procesos. Mi núcleo técnico principal es <strong>Python</strong>, con el cual desarrollo plataformas administrativas, pipelines de análisis de datos con <strong>Pandas</strong> y herramientas con persistencia en <strong>SQL (MySQL / SQLite)</strong>.
+            </p>
+            <p>
+              Mi interés por la tecnología va más allá del desarrollo: administro entornos <strong>Linux (Kali / Debian / Arch)</strong> y aplico técnicas de <strong>ciberseguridad ofensiva/defensiva</strong> para diseñar sistemas con seguridad desde la base. Actualmente también expando mis competencias hacia el ecosistema móvil con <strong>Kotlin</strong>.
+            </p>
+          </div>
+
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon"><i class="fas fa-gears"></i></div>
+              <div class="highlight-text">
+                <h4>Automatización & Backend</h4>
+                <p>Desarrollo de herramientas CLI, APIs y paneles administrativos robustos.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon"><i class="fas fa-user-shield"></i></div>
+              <div class="highlight-text">
+                <h4>Auditoría & Seguridad</h4>
+                <p>Information gathering, escaneo de vulnerabilidades y resolución de máquinas CTF.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon"><i class="fas fa-database"></i></div>
+              <div class="highlight-text">
+                <h4>Datos & Normalización</h4>
+                <p>Modelado relacional SQL y procesamiento masivo de datos con Pandas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- SECCIÓN 2: SKILLS -->
-      <section id="tecnologias" class="fade-in">
-        <h2>Stack Tecnológico</h2>
-        <p
-          style="
-            text-align: center;
-            color: #8b949e;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-          "
-        >
-          <i class="fas fa-hand-pointer"></i> Haz clic en las tarjetas para ver
-          librerías
-        </p>
+      <section id="tecnologias" class="section-block fade-in">
+        <div class="section-header">
+          <span class="section-tag"><i class="fas fa-code"></i> Especialidades</span>
+          <h2>Stack Tecnológico</h2>
+          <p class="section-subtitle">
+            <i class="fas fa-hand-pointer"></i> Haz clic en las tarjetas para explorar librerías y herramientas
+          </p>
+        </div>
+
         <div class="tech-grid">
           <!-- Python -->
           <div class="tech-card tech-python">
@@ -168,11 +316,13 @@
             <div class="tech-details">
               <ul>
                 <li>Django</li>
-                <li>Ciberseguridad</li>
-                <li>Scripting</li>
+                <li>Pandas</li>
+                <li>Scripting / CLI</li>
+                <li>Automatización</li>
               </ul>
             </div>
           </div>
+
           <!-- C# -->
           <div class="tech-card tech-csharp">
             <div class="tech-content">
@@ -183,9 +333,11 @@
               <ul>
                 <li>.NET Core</li>
                 <li>WinForms</li>
+                <li>POO & MVC</li>
               </ul>
             </div>
           </div>
+
           <!-- SQL -->
           <div class="tech-card tech-sql">
             <div class="tech-content">
@@ -196,10 +348,12 @@
               <ul>
                 <li>MySQL</li>
                 <li>SQLite</li>
-                <li>Relacional</li>
+                <li>Modelado ER</li>
+                <li>Optimización</li>
               </ul>
             </div>
           </div>
+
           <!-- Linux -->
           <div class="tech-card tech-linux">
             <div class="tech-content">
@@ -208,27 +362,29 @@
             </div>
             <div class="tech-details">
               <ul>
-                <li>Bash</li>
-                <li>Permisos</li>
-                <li>Parrot OS</li>
-                <li>Kali</li>
+                <li>Bash Scripting</li>
+                <li>Permisos & SysAdmin</li>
+                <li>Kali / Parrot OS</li>
+                <li>Networking</li>
               </ul>
             </div>
           </div>
+
           <!-- Git -->
           <div class="tech-card tech-git">
             <div class="tech-content">
               <div class="icon-box"><i class="fab fa-git-alt"></i></div>
-              <span class="tech-name">Git</span>
+              <span class="tech-name">Git & GitHub</span>
             </div>
             <div class="tech-details">
               <ul>
-                <li>GitHub</li>
-                <li>Branches</li>
+                <li>Control de Versiones</li>
+                <li>Branches & CI/CD</li>
                 <li>Git Bash</li>
               </ul>
             </div>
           </div>
+
           <!-- HTML5 -->
           <div class="tech-card tech-html">
             <div class="tech-content">
@@ -237,12 +393,13 @@
             </div>
             <div class="tech-details">
               <ul>
-                <li>Semántica</li>
-                <li>Accesibilidad</li>
-                <li>Canvas</li>
+                <li>Semántica Web</li>
+                <li>Accesibilidad (a11y)</li>
+                <li>Canvas API</li>
               </ul>
             </div>
           </div>
+
           <!-- CSS3 -->
           <div class="tech-card tech-css">
             <div class="tech-content">
@@ -251,24 +408,25 @@
             </div>
             <div class="tech-details">
               <ul>
-                <li>Flexbox</li>
-                <li>Grid</li>
-                <li>Animaciones</li>
+                <li>Flexbox & Grid</li>
+                <li>Glassmorphism</li>
+                <li>Animaciones Modernas</li>
               </ul>
             </div>
           </div>
+
           <!-- Pentesting -->
           <div class="tech-card tech-security">
             <div class="tech-content">
-              <div class="icon-box"><i class="fas fa-user-shield"></i></div>
+              <div class="icon-box"><i class="fas fa-shield-halved"></i></div>
               <span class="tech-name">Pentesting</span>
             </div>
             <div class="tech-details">
               <ul>
-                <li>Nmap</li>
-                <li>Metasploit</li>
-                <li>Hydra</li>
+                <li>Nmap & Recon</li>
+                <li>Hydra & Fuerza bruta</li>
                 <li>Burp Suite</li>
+                <li>Metasploit</li>
               </ul>
             </div>
           </div>
@@ -276,46 +434,85 @@
       </section>
 
       <!-- SECCIÓN 3: PROYECTOS DINÁMICOS -->
-      <section id="proyectos" class="fade-in">
-        <h2>Proyectos Destacados</h2>
-        <div id="projects-container"></div>
+      <section id="proyectos" class="section-block fade-in">
+        <div class="section-header">
+          <span class="section-tag"><i class="fas fa-laptop-code"></i> Portafolio</span>
+          <h2>Proyectos Destacados</h2>
+          <p class="section-subtitle">
+            Soluciones de software, pipelines de automatización y auditorías técnicas
+          </p>
+        </div>
+
+        <div id="projects-container" class="projects-grid"></div>
       </section>
 
       <!-- SECCIÓN 4: CONTACTO -->
-      <section id="contacto" class="fade-in">
-        <h2>Contacto</h2>
+      <section id="contacto" class="section-block fade-in">
+        <div class="section-header">
+          <span class="section-tag"><i class="fas fa-envelope"></i> Conexión</span>
+          <h2>Contacto</h2>
+          <p class="section-subtitle">
+            ¿Tienes una propuesta, un proyecto en mente o quieres conversar sobre seguridad?
+          </p>
+        </div>
 
         <div class="contact-wrapper">
-          <div class="contact-info">
-            <p>
-              ¿Tienes un proyecto en mente o quieres hablar de seguridad?
-              ¡Escríbeme!
+          <!-- Info de Contacto -->
+          <div class="contact-info-card">
+            <h3 class="contact-card-title">Hablemos de tus proyectos</h3>
+            <p class="contact-card-text">
+              Estoy disponible para oportunidades de desarrollo, prácticas profesionales y proyectos colaborativos.
             </p>
-            <p class="email-copy" id="emailCopy">
-              <i class="fas fa-envelope"></i>
-              <strong>henryalexanderleyton@gmail.com</strong>
-            </p>
-            <div class="social-links">
-              <a href="https://github.com/mrbluesan" target="_blank"
-                ><i class="fab fa-github"></i> GitHub</a
+
+            <div class="email-box" id="emailCopy" title="Haz clic para copiar el correo">
+              <div class="email-icon"><i class="fas fa-envelope"></i></div>
+              <div class="email-details">
+                <span class="email-label">Correo Electrónico</span>
+                <strong class="email-address">henryalexanderleyton@gmail.com</strong>
+              </div>
+              <span class="copy-badge"><i class="fas fa-copy"></i> Copiar</span>
+            </div>
+
+            <div class="contact-social-grid">
+              <a
+                href="https://github.com/mrbluesan"
+                target="_blank"
+                class="contact-social-link"
               >
-              <a href="https://tryhackme.com/p/mrbluesan" target="_blank"
-                ><i class="fas fa-shield-alt"></i> TryHackMe</a
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+              </a>
+              <a
+                href="https://tryhackme.com/p/mrbluesan"
+                target="_blank"
+                class="contact-social-link"
               >
+                <i class="fas fa-shield-halved"></i>
+                <span>TryHackMe</span>
+              </a>
               <a
                 href="https://www.linkedin.com/in/henry-leyton-gonz%C3%A1lez-97270717b/"
                 target="_blank"
-                ><i class="fab fa-linkedin"></i> LinkedIn</a
+                class="contact-social-link"
               >
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+              </a>
             </div>
-            <a href="assets/docs/CV_Henry_Leyton.pdf" download class="btn-cv">
-              <i class="fas fa-file-download"></i> Descargar mi CV
+
+            <a
+              href="assets/docs/CV_Henry_Leyton.pdf"
+              download
+              class="btn-cv-download"
+            >
+              <i class="fas fa-file-arrow-down"></i> Descargar Curriculum Vitae (PDF)
             </a>
           </div>
 
-          <!-- Formulario -->
+          <!-- Formulario con EmailJS -->
           <form id="contactForm" class="contact-form">
-            <h3 class="form-title">Formulario de Contacto</h3>
+            <h3 class="form-title">Envíame un Mensaje</h3>
+            
             <div class="form-group">
               <input
                 type="text"
@@ -324,8 +521,9 @@
                 required
                 placeholder=" "
               />
-              <label for="name">Nombre</label>
+              <label for="name">Tu Nombre</label>
             </div>
+
             <div class="form-group">
               <input
                 type="email"
@@ -334,8 +532,9 @@
                 required
                 placeholder=" "
               />
-              <label for="email">Correo Electrónico</label>
+              <label for="email">Tu Correo Electrónico</label>
             </div>
+
             <div class="form-group">
               <textarea
                 id="message"
@@ -344,48 +543,71 @@
                 required
                 placeholder=" "
               ></textarea>
-              <label for="message">Mensaje</label>
+              <label for="message">Mensaje o Consulta</label>
             </div>
+
             <button type="submit" class="btn-submit">
-              Enviar Mensaje <i class="fas fa-paper-plane"></i>
+              <span>Enviar Mensaje</span>
+              <i class="fas fa-paper-plane"></i>
             </button>
           </form>
         </div>
       </section>
     </main>
 
-    <!-- MODAL -->
-    <div id="projectModal" class="modal">
+    <!-- MODAL DE PROYECTO -->
+    <div id="projectModal" class="modal" role="dialog" aria-modal="true">
       <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2 id="modalTitle">Título</h2>
+        <button class="close-modal" aria-label="Cerrar modal">&times;</button>
+        <h2 id="modalTitle">Título del Proyecto</h2>
+        
         <div class="modal-gallery-container">
-          <button class="modal-nav-btn prev-modal">
+          <button class="modal-nav-btn prev-modal" aria-label="Imagen anterior">
             <i class="fas fa-chevron-left"></i>
           </button>
           <img
             id="modalImg"
             class="modal-gallery-img"
             src=""
-            alt="Vista Previa"
+            alt="Vista Previa de Proyecto"
           />
-          <button class="modal-nav-btn next-modal">
+          <button class="modal-nav-btn next-modal" aria-label="Siguiente imagen">
             <i class="fas fa-chevron-right"></i>
           </button>
+          <div class="modal-counter" id="modalCounter">1 / 1</div>
         </div>
+
         <div class="modal-info">
-          <p id="modalDesc">Descripción...</p>
+          <p id="modalDesc">Descripción detallada...</p>
           <div class="modal-techs">
-            <strong>Tecnologías:</strong> <span id="modalTech"></span>
+            <strong>Tecnologías utilizadas:</strong>
+            <div id="modalTechBadges" class="modal-badges-container"></div>
           </div>
-          <a id="modalRepo" href="#" target="_blank" class="btn-repo modal-btn"
-            >Ver Repositorio <i class="fab fa-github"></i
-          ></a>
+          <div class="modal-actions">
+            <a
+              id="modalRepo"
+              href="#"
+              target="_blank"
+              class="btn-primary modal-btn"
+            >
+              Ver Repositorio en GitHub <i class="fab fa-github"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
 
-    <footer><p>© 2025 Henry Leyton González - Portafolio Personal</p></footer>
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <p>© 2025 Henry Leyton González · Construido con HTML5, CSS3 y JavaScript</p>
+        <a href="#hero" class="btn-scroll-top" aria-label="Volver arriba">
+          <i class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </footer>
+
+    <!-- SCRIPT PRINCIPAL -->
     <script src="js/main.js"></script>
   </body>
 </html>
