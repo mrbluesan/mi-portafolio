@@ -73,14 +73,14 @@ const myProjects = [
     ],
   },
   {
-    title: "Framework Automatizado de Reconocimiento Inicial",
-    category: "Ciberseguridad & Scripting",
-    desc: "Herramienta de scripting en Bash para automatizar y estandarizar la fase de Information Gathering en ejercicios de pentesting web e infraestructura. Ejecuta descubrimiento de hosts (ping sweep), escaneo profundo de puertos y servicios con Nmap, y estructura automáticamente carpetas de evidencias organizadas por target.",
-    tech: "Bash, Nmap, Linux, Pentesting",
+    title: "Sistema de monitoreo de red (proyecto en etapa 1 de MoveIncuba)",
+    category: "Ciberseguridad & Automatización",
+    desc: "Solución web enfocada en la centralización, análisis de eventos e integridad de datos para infraestructuras de red en PyMEs. Proyecto en etapa de validación comercial y prototipado avanzado, con un Producto Mínimo Viable (MVP) testeado para responder a necesidades críticas de diagnóstico operativo, auditoría y normativas de ciberseguridad. El proyecto lo estoy realizando en colaboración con desarrollador Leonardo Ahumada",
+    tech: "Bash, Linux, BlueTeam, Grafana, Wazuh, Python, Docker, PostGreSQL, Django",
     repo: "https://github.com/mrbluesan/proyecto2",
     images: [
-      "https://placehold.co/600x350/161b22/58a6ff?text=Framework+Recon:+Terminal",
-      "https://placehold.co/600x350/0d1117/00ff41?text=Framework+Recon:+Scripts",
+      "https://placehold.co/600x350/161b22/58a6ff?text=Sistema+Monitoreo",
+      "https://placehold.co/600x350/0d1117/00ff41?text=Sistema+Monitoreo:+Análisis",
     ],
   },
   {
@@ -379,9 +379,9 @@ let commandHistory = [];
 let historyIndex = -1;
 
 const virtualFileSystem = {
-  "skills.txt": "Python, Django, Pandas, SQL, Linux, Git, Nmap, Pentesting",
+  "skills.txt": "Python, Django, Pandas, SQL, Linux, Git, Nmap, Pentesting y seguridad defensiva",
   "about.md":
-    "Estudiante de Ingeniería en Informática. Desarrollador y Pentester.",
+    "Estudiante de Ingeniería en Informática. Desarrollador y Ciberseguridad.",
   "contact.info":
     "Email: henryalexanderleyton@gmail.com\nGitHub: github.com/mrbluesan",
   ".secret": "Felicidades hacker. Toma tu flag: THM{m4st3r_p0rtf0l10}",
